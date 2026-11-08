@@ -1,0 +1,72 @@
+%%{init: {
+  "theme": "base",
+  "fontFamily": "Inter, Helvetica, Arial, sans-serif",
+  "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .label, foreignObject div, foreignObject span, text { font-family: Inter, Helvetica, Arial, sans-serif !important; }",
+  "themeVariables": {
+    "fontFamily": "Inter, Helvetica, Arial, sans-serif",
+    "fontSize": "13px",
+    "primaryColor": "#ffffff",
+    "primaryTextColor": "#1a1a1a",
+    "primaryBorderColor": "#4d4d4d",
+    "lineColor": "#4d4d4d",
+    "clusterBkg": "#f4f4f4",
+    "clusterBorder": "#9a9a9a",
+    "edgeLabelBackground": "#ffffff"
+  },
+  "flowchart": { "curve": "basis", "nodeSpacing": 58, "rankSpacing": 30, "padding": 10 }
+}}%%
+flowchart LR
+    %% capa de esquema
+    ONTO["<b>Ontología OWL 2 DL (T-Box)</b><br/>Módulos: contrato, Incoterms,<br/>logística, calidad, entidades"]
+
+    %% flujo de datos: fuentes, materialización, almacenamiento y explotación
+    subgraph FUENTES["<b>Fuentes</b>"]
+        direction LR
+        EIA["<b>Importaciones EIA</b><br/>CSV mensual por empresa"]
+        GLEIF["<b>GLEIF L1 y L2</b><br/>LEI, nombre legal y matriz"]
+        RECAPS["<b>Recaps sintéticos</b><br/>Incoterm, laycan, calidad"]
+        ALIAS["<b>Tabla de alias</b><br/>Alias a LEI, curada"]
+    end
+
+    subgraph PIPE["<b>Materialización</b>"]
+        direction TB
+        RML["<b>Mapeos RML</b><br/>uno por fuente"]
+        MORPH["<b>Morph-KGC</b><br/>materializa las tripletas"]
+        RML --> MORPH
+    end
+
+    subgraph TS["<b>Apache Jena Fuseki</b> (<i>triplestore</i>)"]
+        direction LR
+        G_EIA["Grafo EIA"]
+        G_GLEIF["Grafo GLEIF"]
+        G_RECAPS["Grafo de recaps"]
+        G_INF["Grafo de inferencias"]
+        G_ONTO["Ontología y alineamientos"]
+    end
+
+    SHACL["<b>Validación SHACL</b><br/>Mundo cerrado: fuera de<br/>especificación o de laycan"]
+    SPARQL["<b>Consultas SPARQL</b><br/>Preguntas de competencia<br/>convertidas en pruebas"]
+
+    %% relaciones de esquema (discontinuas)
+    ONTO -. se carga en el grafo .-> TS
+    ONTO -. vocabulario .-> PIPE
+
+    %% flujo de datos (continuas)
+    FUENTES --> PIPE
+    PIPE --> TS
+    TS --> SHACL
+    TS --> SPARQL
+
+
+    linkStyle default stroke:#4d4d4d,stroke-width:1.2px
+    linkStyle 1,2 stroke:#2f4f7f,stroke-width:1.2px
+
+    classDef box fill:#ffffff,stroke:#4d4d4d,stroke-width:1px,color:#1a1a1a
+    classDef onto fill:#e9eef6,stroke:#2f4f7f,stroke-width:1.5px,color:#1a1a1a
+    classDef out fill:#ffffff,stroke:#1a1a1a,stroke-width:1.5px,color:#1a1a1a
+    class EIA,GLEIF,RECAPS,ALIAS,RML,MORPH,G_EIA,G_GLEIF,G_RECAPS,G_INF,G_ONTO box
+    class ONTO onto
+    class SHACL,SPARQL out
+    style FUENTES fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style PIPE fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style TS fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
