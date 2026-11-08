@@ -1,31 +1,70 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "fontFamily": "Arial, Helvetica, sans-serif",
+    "fontSize": "13px",
+    "primaryColor": "#ffffff",
+    "primaryTextColor": "#1a1a1a",
+    "primaryBorderColor": "#4d4d4d",
+    "lineColor": "#4d4d4d",
+    "clusterBkg": "#f4f4f4",
+    "clusterBorder": "#9a9a9a",
+    "edgeLabelBackground": "#ffffff"
+  },
+  "flowchart": { "curve": "basis", "nodeSpacing": 58, "rankSpacing": 30, "padding": 10 }
+}}%%
 flowchart LR
-    ONTO["<b>Ontología OWL 2 DL (T-Box)</b><br/>Módulos: contrato, Incoterms, logística, calidad, entidades"]
+    %% capa de esquema
+    ONTO["<b>Ontología OWL 2 DL (T-Box)</b><br/>Módulos: contrato, Incoterms,<br/>logística, calidad, entidades"]
 
-    subgraph FUENTES[Fuentes]
-        EIA["Importaciones EIA: CSV mensual por empresa"]
-        GLEIF["GLEIF L1 y L2<br/>LEI, nombre legal y matriz"]
-        RECAPS["Recaps sintéticos<br/>Incoterm, laycan, calidad"]
-        ALIAS["Tabla de alias<br/>Alias a LEI, curada"]
+    %% flujo de datos: fuentes, materialización, almacenamiento y explotación
+    subgraph FUENTES["<b>Fuentes</b>"]
+        direction LR
+        EIA["<b>Importaciones EIA</b><br/>CSV mensual por empresa"]
+        GLEIF["<b>GLEIF L1 y L2</b><br/>LEI, nombre legal y matriz"]
+        RECAPS["<b>Recaps sintéticos</b><br/>Incoterm, laycan, calidad"]
+        ALIAS["<b>Tabla de alias</b><br/>Alias a LEI, curada"]
     end
 
-    RML["<b>Mapeos RML</b>: uno por fuente"]
-    MORPH["Morph-KGC<br/>materializa las tripletas"]
-
-    subgraph TS["<b>Apache Jena Fuseki</b> (<i>triplestore</i>): un grafo por fuente"]
-        G_EIA[Grafo EIA]
-        G_GLEIF[Grafo GLEIF]
-        G_RECAPS[Grafo de recaps]
-        G_INF[Grafo de inferencias]
-        G_ONTO[Ontología y alineamientos]
+    subgraph PIPE["<b>Materialización</b>"]
+        direction TB
+        RML["<b>Mapeos RML</b><br/>uno por fuente"]
+        MORPH["<b>Morph-KGC</b><br/>materializa las tripletas"]
+        RML --> MORPH
     end
 
-    SHACL["<b>Validación SHACL</b><br/>Mundo cerrado: fuera de especificación o de laycan"]
-    SPARQL["<b>Consultas SPARQL</b><br/>Preguntas de competencia convertidas en pruebas"]
+    subgraph TS["<b>Apache Jena Fuseki</b> (<i>triplestore</i>)"]
+        direction LR
+        G_EIA["Grafo EIA"]
+        G_GLEIF["Grafo GLEIF"]
+        G_RECAPS["Grafo de recaps"]
+        G_INF["Grafo de inferencias"]
+        G_ONTO["Ontología y alineamientos"]
+    end
 
-    FUENTES --> RML
-    ONTO -- vocabulario --> RML
-    RML --> MORPH
-    MORPH --> TS
-    ONTO -- se carga en el grafo --> TS
+    SHACL["<b>Validación SHACL</b><br/>Mundo cerrado: fuera de<br/>especificación o de laycan"]
+    SPARQL["<b>Consultas SPARQL</b><br/>Preguntas de competencia<br/>convertidas en pruebas"]
+
+    %% relaciones de esquema (discontinuas)
+    ONTO -. se carga en el grafo .-> TS
+    ONTO -. vocabulario .-> PIPE
+
+    %% flujo de datos (continuas)
+    FUENTES --> PIPE
+    PIPE --> TS
     TS --> SHACL
     TS --> SPARQL
+
+
+    linkStyle default stroke:#4d4d4d,stroke-width:1.2px
+    linkStyle 1,2 stroke:#2f4f7f,stroke-width:1.2px
+
+    classDef box fill:#ffffff,stroke:#4d4d4d,stroke-width:1px,color:#1a1a1a
+    classDef onto fill:#e9eef6,stroke:#2f4f7f,stroke-width:1.5px,color:#1a1a1a
+    classDef out fill:#ffffff,stroke:#1a1a1a,stroke-width:1.5px,color:#1a1a1a
+    class EIA,GLEIF,RECAPS,ALIAS,RML,MORPH,G_EIA,G_GLEIF,G_RECAPS,G_INF,G_ONTO box
+    class ONTO onto
+    class SHACL,SPARQL out
+    style FUENTES fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style PIPE fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style TS fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
