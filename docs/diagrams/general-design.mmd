@@ -1,0 +1,31 @@
+flowchart LR
+    ONTO["<b>Ontología OWL 2 DL (T-Box)</b><br/>Módulos: contrato, Incoterms, logística, calidad, entidades"]
+
+    subgraph FUENTES[Fuentes]
+        EIA["Importaciones EIA: CSV mensual por empresa"]
+        GLEIF["GLEIF L1 y L2<br/>LEI, nombre legal y matriz"]
+        RECAPS["Recaps sintéticos<br/>Incoterm, laycan, calidad"]
+        ALIAS["Tabla de alias<br/>Alias a LEI, curada"]
+    end
+
+    RML["<b>Mapeos RML</b>: uno por fuente"]
+    MORPH["Morph-KGC<br/>materializa las tripletas"]
+
+    subgraph TS["<b>Apache Jena Fuseki</b> (<i>triplestore</i>): un grafo por fuente"]
+        G_EIA[Grafo EIA]
+        G_GLEIF[Grafo GLEIF]
+        G_RECAPS[Grafo de recaps]
+        G_INF[Grafo de inferencias]
+        G_ONTO[Ontología y alineamientos]
+    end
+
+    SHACL["<b>Validación SHACL</b><br/>Mundo cerrado: fuera de especificación o de laycan"]
+    SPARQL["<b>Consultas SPARQL</b><br/>Preguntas de competencia convertidas en pruebas"]
+
+    FUENTES --> RML
+    ONTO -- vocabulario --> RML
+    RML --> MORPH
+    MORPH --> TS
+    ONTO -- se carga en el grafo --> TS
+    TS --> SHACL
+    TS --> SPARQL
