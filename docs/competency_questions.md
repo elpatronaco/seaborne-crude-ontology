@@ -1,23 +1,23 @@
 # Competency Questions
 
-Copied to markdown from section **4.1.3.1** of the thesis.
-
-| ID | Group / UC | Question | Layer | Priority | Iteration |
-|---|---|---|---|---|---|
-| CQ01 | CQG1 / UC1 | Which party bears the transit risk of a cargo according to its Incoterm? | OWL 2 DL | High | 1 |
-| CQ02 | CQG1 / UC1 | Which party contracts and pays for freight and, where applicable, insurance under a contract? | OWL 2 DL / SPARQL | High | 1 |
-| CQ03 | CQG1 / UC1 | Which physical sales contracts are governed by Incoterms 2010 vs. 2020? | SPARQL | High | 1 |
-| CQ04 | CQG1 / UC1 | Which spot vs. term contracts are backed by a deal recap, and which GT&Cs do they incorporate? | SPARQL | High | 1 |
-| CQ05 | CQG1 / UC1 | Which contracts have the seller bearing both freight cost and transit risk during sea carriage? | OWL 2 DL | High | 1 |
-| CQ06 | CQG2 / UC2 | Which cargoes tendered NOR or loaded outside the agreed laycan? | SHACL-SPARQL | High | 1 |
-| CQ07 | CQG2 / UC2 | Which party must nominate the vessel under a contract according to its Incoterm? | OWL 2 DL / SPARQL | High | 1 |
-| CQ08 | CQG2 / UC2 | Which vessel nominations breach the minimum notice before the first day of laycan (8 days in BP GT&Cs)? | SHACL-SPARQL | High | 1 |
-| CQ09 | CQG2 / UC2 | Which cargoes travel on a given AFRA class vessel (Aframax, Suezmax, or VLCC) and between which load and discharge ports? | SPARQL | High | 1 |
-| CQ10 | CQG2 / UC2 | Which cargoes breach contractual volume (barrels or metric tons) given the agreed operational tolerance? | SHACL-SPARQL | High | 1 |
-| CQ11 | CQG3 / UC3 | Which crude cargoes have a measured API gravity outside the guaranteed range in the contract (recap)? | SHACL-SPARQL | High | 1 |
-| CQ12 | CQG3 / UC3 | Which crude cargoes have a measured sulfur content above the guaranteed maximum in the contract? | SHACL-SPARQL | High | 1 |
-| CQ13 | CQG3 / UC3 | Which cargoes deviate from a typical value but meet all guaranteed limits (not a breach)? | SHACL-SPARQL / SPARQL | High | 1 |
-| CQ14 | CQG3 / UC3 | How is a cargo classified under EIA thresholds (heavy/intermediate/light and sweet/sour)? | OWL 2 DL | High | 1 |
-| CQ15 | CQG4 / UC4 | Which contracts have the same corporate group as counterparty, directly or through subsidiaries? | OWL 2 DL + SPARQL | Medium | 2 |
-| CQ16 | CQG4 / UC4 | Which corporate groups imported crude from origins transiting the Strait of Hormuz in a given period? | OWL 2 DL + SPARQL | Medium | 2 |
-| CQ17 | CQG4 / UC4 | Which contracts were executed between subsidiaries of the same parent or corporate group? | OWL 2 DL + SPARQL | Medium | 2 |
+| ID | Group / UC | Question | Expected Answer | Layer | Priority | Iteration |
+|---|---|---|---|---|---|---|
+| CQ01 | CQG1 / UC1 | Which party bears sea-transit risk for a cargo under its contract? | Buyer in FOB, CFR, and CIF; seller in DAP. | OWL 2 DL + SPARQL | Critical | 1 |
+| CQ02 | CQG1 / UC1 | Which party contracts and pays for freight and, where required, cargo insurance under a contract? | Freight: buyer in FOB; seller in CFR, CIF, and DAP. Insurance: seller in CIF. | OWL 2 DL + SPARQL | Critical | 1 |
+| CQ03 | CQG1 / UC1 | Which Incoterms edition governs each contract, and which contracts override their GT&Cs default? | Contracts grouped by effective Incoterms edition (2010 vs. 2020), flagging Recap overrides over GT&Cs. | SPARQL | Medium | 1 |
+| CQ04 | CQG1 / UC1 | Which spot and term contracts are evidenced by a deal recap, and which GT&Cs do they incorporate? | Spot and term contracts with their backing deal recap(s) and incorporated GT&Cs. | SPARQL | Medium | 1 |
+| CQ05 | CQG1 / UC1 | Which contracts have the seller bearing both sea-freight cost and transit risk? | DAP contracts only. | OWL 2 DL | Critical | 1 |
+| CQ06 | CQG2 / UC2 | Which cargoes tendered Notice of Readiness after the cancelling date of their agreed laycan? | Cargoes whose NOR was tendered after the cancelling date of their laycan or delivery window. | SHACL-SPARQL | High | 1 |
+| CQ07 | CQG2 / UC2 | Which party must nominate the vessel under a contract? | Buyer in FOB; seller in CFR, CIF, and DAP. | OWL 2 DL + SPARQL | Critical | 1 |
+| CQ08 | CQG2 / UC2 | Which vessel nominations breach the effective contractual minimum notice period before laycan? | Nominations sent later than the effective minimum notice period before laycan (excluding prompt deals). | SHACL-SPARQL | High | 1 |
+| CQ09 | CQG2 / UC2 | Which cargoes travel on vessels of a given AFRA class (inferred from vessel DWT), and between which load and discharge ports? | Cargoes on vessels classified by HermiT into the given AFRA class (Aframax, Suezmax, or VLCC) from their DWT, with vessel, load port, and discharge port. | OWL 2 DL + SPARQL | Medium | 1 |
+| CQ10 | CQG2 / UC2 | Which cargoes breach contracted parcel quantity given the agreed operational tolerance? | Cargoes whose loaded (FOB/CFR/CIF) or discharged (DAP) quantity falls outside parcel quantity ± tolerance, or has a unit mismatch. | SHACL-SPARQL | High | 1 |
+| CQ11 | CQG3 / UC3 | Which cargoes have a measured API gravity outside the contract's guaranteed limits? | Cargoes whose measured API gravity falls outside the contract's guaranteed min/max bounds. | SHACL-SPARQL | High | 1 |
+| CQ12 | CQG3 / UC3 | Which cargoes have a measured sulfur content above the contract's guaranteed maximum? | Cargoes whose measured sulfur exceeds the contract's guaranteed maximum. | SHACL-SPARQL | High | 1 |
+| CQ13 | CQG3 / UC3 | Which cargoes deviate from typical quality values while still meeting all guaranteed limits? | Cargoes deviating from typical API or sulfur values while passing all guaranteed limits (not a breach). | SPARQL | Medium | 1 |
+| CQ14 | CQG3 / UC3 | How is a cargo classified by EIA crude density and sulfur thresholds? | Heavy (≤ 22.0°), intermediate (22.0–38.0°), or light (> 38.0°) API; sweet (≤ 0.5%) or sour (> 0.5%) sulfur. | OWL 2 DL | High | 1 |
+| CQ15 | CQG4 / UC4 | What active contracts and aggregated volume does each corporate group hold directly or through subsidiaries? | Active contracts and aggregated volume per unit grouped by corporate group (via LEI/GLEIF L2). | OWL 2 DL + SPARQL | Medium | 2 |
+| CQ16 | CQG4 / UC4 | Which corporate groups imported seaborne crude from Strait of Hormuz-exposed origins in a given period, and in what volume? | Corporate groups with seaborne EIA-814 imports from Hormuz-exposed origins (exclusive vs. partial) and volume. | OWL 2 DL + SPARQL | Medium | 2 |
+| CQ17 | CQG4 / UC4 | Which contracts were executed between entities belonging to the same corporate group? | Contracts between distinct entities belonging to the same corporate group (subsidiaries or parent–subsidiary). | OWL 2 DL + SPARQL | Medium | 2 |
+| CQ18 | CQG4 / UC4 + UC1 | What active sea-transit risk and import volume does each corporate group hold on cargoes from chokepoint-exposed origins? | Active cargoes with sea-transit risk per corporate group from chokepoint-exposed origins alongside EIA-814 import volume. | OWL 2 DL + SPARQL | Medium | 2 |
+| CQ19 | CQG2 / UC2 | Which trades or cargoes exceed the deadweight tonnage (DWT) capacity of their nominated or assigned vessel? | Cargoes whose contracted parcel quantity (compared directly in MT, or converted from barrels using API gravity or a ~7.33 bbl/MT fallback) exceeds the vessel's DWT. | SHACL-SPARQL | High | 1 |
