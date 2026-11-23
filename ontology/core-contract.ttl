@@ -155,3 +155,71 @@ sc:contractDate a owl:DatatypeProperty,
     skos:definition "Date on which the contract was signed."@en,
         "Fecha en la que se firmó el contrato."@es .
 
+sc:VolumeQuantity a owl:Class ;
+    rdfs:label "Volume Quantity"@en,
+        "Cantidad de Volumen"@es ;
+    skos:definition "Measured or contracted quantity of crude oil paired with its unit of measure."@en,
+        "Cantidad medida o contratada de crudo junto con su unidad de medida."@es .
+
+sc:QuantityUnit a owl:Class ;
+    rdfs:label "Quantity Unit"@en,
+        "Unidad de Cantidad"@es ;
+    skos:definition "Unit of measure used to express physical crude oil quantities."@en,
+        "Unidad de medida utilizada para expresar cantidades físicas de crudo."@es .
+
+sc:Barrel a owl:NamedIndividual,
+        sc:QuantityUnit ;
+    rdfs:label "Barrel (bbl)"@en,
+        "Barril (bbl)"@es ;
+    skos:definition "US petroleum barrel (42 US gallons) at 60 degrees Fahrenheit."@en,
+        "Barril petrolero estadounidense (42 galones estadounidenses) a 60 grados Fahrenheit."@es .
+
+sc:MetricTonne a owl:NamedIndividual,
+        sc:QuantityUnit ;
+    rdfs:label "Metric Tonne (MT)"@en,
+        "Tonelada Métrica (MT)"@es ;
+    skos:definition "Metric tonne (1,000 kg) used in shipping and crude oil bills of lading."@en,
+        "Tonelada métrica (1.000 kg) utilizada en transporte marítimo y conocimientos de embarque de crudo."@es .
+
+sc:hasContractedVolume a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has contracted volume"@en,
+        "tiene volumen contratado"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:VolumeQuantity ;
+    skos:definition "Links a physical crude oil sales contract to its contracted volume quantity."@en,
+        "Vincula un contrato físico de compraventa de crudo con su cantidad de volumen contratada."@es .
+
+sc:hasQuantityUnit a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has quantity unit"@en,
+        "tiene unidad de cantidad"@es ;
+    rdfs:domain sc:VolumeQuantity ;
+    rdfs:range sc:QuantityUnit ;
+    skos:definition "Links a volume quantity to its unit of measure (such as barrel or metric tonne)."@en,
+        "Vincula una cantidad de volumen con su unidad de medida (como barril o tonelada métrica)."@es .
+
+sc:quantityValue a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "quantity value"@en,
+        "valor de cantidad"@es ;
+    rdfs:domain sc:VolumeQuantity ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Numeric magnitude of a volume quantity in its associated unit."@en,
+        "Magnitud numérica de una cantidad de volumen en su unidad asociada."@es .
+
+sc:operationalTolerancePercent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "operational tolerance percent"@en,
+        "porcentaje de tolerancia operativa"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Permitted percentage deviation (+/-) around the contracted volume for cargo loading."@en,
+        "Desviación porcentual permitida (+/-) respecto al volumen contratado para la carga del buque."@es .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        sc:Barrel
+        sc:MetricTonne
+    ) .
+
