@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # MIT License — Copyright (c) 2026 Pau Colomé
 
-# 
+# Robot es un CLI OBO Tool diseñado como herramienta de automatización
+# para ontologías OWL. Es un símil a Protégé. 
+# Lo utilizamos como razonador HermiT y materializador de axiomas,
+# fusionador de ontologías modulares, métricas, verificación...
 
 set -euo pipefail
 
