@@ -3,6 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcterms:creator a owl:AnnotationProperty .
 
@@ -12,23 +13,9 @@ dcterms:license a owl:AnnotationProperty .
 
 dcterms:title a owl:AnnotationProperty .
 
+skos:altLabel a owl:AnnotationProperty .
+
 skos:definition a owl:AnnotationProperty .
-
-sc:DealRecap a owl:Class ;
-    rdfs:label "Deal Recap"@en,
-        "Resumen de Operación"@es ;
-    rdfs:subClassOf sc:ContractDocument ;
-    skos:definition "Summary of the key commercial terms of a physical crude oil trade, typically used for communication between buyer and seller before a formal contract is issued."@en,
-        "Resumen de los términos comerciales clave de una operación de compraventa de crudo físico, utilizado normalmente para la comunicación entre comprador y vendedor antes de la emisión de un contrato formal."@es .
-
-sc:GTC a owl:Class ;
-    rdfs:label "General Terms and Conditions"@en,
-        "Términos y Condiciones Generales"@es ;
-    rdfs:subClassOf sc:ContractDocument ;
-    skos:altLabel "GT&Cs"@en,
-        "T&Cs"@en ;
-    skos:definition "Standard, pre-drafted clauses that set the baseline rules for commercial transactions between businesses, not specific to any single deal"@en,
-        "Cláusulas estándares y pre-redactadas que establecen las reglas básicas para las transacciones comerciales entre empresas, no específicas para una única operación"@es .
 
 sc:SpotContract a owl:Class ;
     rdfs:label "Spot Contract"@en,
@@ -37,6 +24,53 @@ sc:SpotContract a owl:Class ;
     owl:disjointWith sc:TermContract ;
     skos:definition "Physical crude oil sales contract for a single cargo or parcel with immediate or near-term delivery."@en,
         "Contrato físico de compraventa de crudo para un único cargamento o lote con entrega inmediata o a corto plazo."@es .
+
+sc:backedByRecap a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "backed by recap"@en,
+        "respaldado por resumen de operación"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:DealRecap ;
+    rdfs:subPropertyOf sc:hasContractDocument ;
+    skos:definition "Links a physical crude oil sales contract to the deal recap confirming its negotiated commercial terms."@en,
+        "Vincula un contrato físico de compraventa de crudo con el resumen de operación que confirma sus términos comerciales negociados."@es .
+
+sc:hasBuyer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has buyer"@en,
+        "tiene comprador"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:Party ;
+    skos:definition "Links a physical crude oil sales contract to the party buying and receiving the crude oil."@en,
+        "Vincula un contrato físico de compraventa de crudo con la parte que compra y recibe el crudo."@es .
+
+sc:hasSeller a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has seller"@en,
+        "tiene vendedor"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:Party ;
+    skos:definition "Links a physical crude oil sales contract to the party selling and delivering the crude oil."@en,
+        "Vincula un contrato físico de compraventa de crudo con la parte que vende y entrega el crudo."@es .
+
+sc:incorporatesGTC a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "incorporates GT&Cs"@en,
+        "incorpora condiciones generales"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:GTC ;
+    rdfs:subPropertyOf sc:hasContractDocument ;
+    skos:definition "Links a physical crude oil sales contract to the general terms and conditions incorporated into it."@en,
+        "Vincula un contrato físico de compraventa de crudo con las condiciones generales incorporadas al mismo."@es .
+
+sc:nominationNoticeDays a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "nomination notice days"@en,
+        "días de preaviso de nominación"@es ;
+    rdfs:domain sc:ContractDocument ;
+    rdfs:range xsd:integer ;
+    skos:definition "Minimum number of days before the first day of the laycan required to submit a valid vessel nomination."@en,
+        "Número mínimo de días previos al primer día de la ventana de carga (laycan) requeridos para presentar una nominación de buque válida."@es .
 
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -48,6 +82,14 @@ sc:SpotContract a owl:Class ;
     owl:versionIRI <https://w3id.org/seaborne-crude/core-contract/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
+sc:DealRecap a owl:Class ;
+    rdfs:label "Deal Recap"@en,
+        "Resumen de Operación"@es ;
+    rdfs:subClassOf sc:ContractDocument ;
+    owl:disjointWith sc:GTC ;
+    skos:definition "Summary of the key commercial terms of a physical crude oil trade, typically used for communication between buyer and seller before a formal contract is issued."@en,
+        "Resumen de los términos comerciales clave de una operación de compraventa de crudo físico, utilizado normalmente para la comunicación entre comprador y vendedor antes de la emisión de un contrato formal."@es .
+
 sc:TermContract a owl:Class ;
     rdfs:label "Term Contract"@en,
         "Contrato a Término"@es ;
@@ -55,15 +97,43 @@ sc:TermContract a owl:Class ;
     skos:definition "Ongoing physical crude oil sales contract covering multiple scheduled cargoes over an agreed period."@en,
         "Contrato físico continuo de compraventa de crudo que cubre múltiples cargamentos programados durante un período acordado."@es .
 
+sc:GTC a owl:Class ;
+    rdfs:label "General Terms and Conditions"@en,
+        "Términos y Condiciones Generales"@es ;
+    rdfs:subClassOf sc:ContractDocument ;
+    skos:altLabel "GT&Cs"@en,
+        "T&Cs"@en ;
+    skos:definition "Standard, pre-drafted clauses that set the baseline rules for commercial transactions between businesses, not specific to any single deal"@en,
+        "Cláusulas estándares y pre-redactadas que establecen las reglas básicas para las transacciones comerciales entre empresas, no específicas para una única operación"@es .
+
+sc:hasContractDocument a owl:ObjectProperty ;
+    rdfs:label "has contract document"@en,
+        "tiene documento contractual"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:ContractDocument ;
+    skos:definition "Links a physical crude oil sales contract to one of its constituent contractual documents."@en,
+        "Vincula un contrato físico de compraventa de crudo con uno de sus documentos contractuales constitutivos."@es .
+
+sc:Party a owl:Class ;
+    rdfs:label "Party"@en,
+        "Parte"@es ;
+    skos:definition "A legal entity that is a party to a contract."@en,
+        "Entidad legal que es parte de un contrato."@es .
+
 sc:ContractDocument a owl:Class ;
     rdfs:label "Contract Document"@en,
         "Documento Contractual"@es ;
+    owl:disjointWith sc:Party ;
     skos:definition "Document that contains contractual terms agreed by the parties involved in a transaction."@en,
         "Documento que contiene los términos contractuales acordados por las partes implicadas en una transacción."@es .
 
 sc:PhysicalCrudeContract a owl:Class ;
     rdfs:label "Physical Crude Contract"@en,
         "Contrato Físico de Crudo"@es ;
+    owl:disjointWith sc:ContractDocument,
+        sc:Party ;
     skos:definition "Physical crude oil sales contract."@en,
-        "Contrato físico de compraventa de crudo."@es .
+        "Contrato físico de compraventa de crudo."@es ;
+    skos:note "Is disjoint, must be either spot or term contract"@en,
+        "Es disjunto, debe ser contrato spot o contrato a término"@es .
 
