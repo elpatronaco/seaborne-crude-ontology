@@ -1,7 +1,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sc: <https://schema.org/> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -13,44 +14,16 @@ dcterms:license a owl:AnnotationProperty .
 
 dcterms:title a owl:AnnotationProperty .
 
+skos:altLabel a owl:AnnotationProperty .
+
 skos:definition a owl:AnnotationProperty .
 
 skos:scopeNote a owl:AnnotationProperty .
 
-sc:Aframax a owl:Class ;
-    rdfs:label "Aframax"@en,
-        "Aframax"@es ;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:definition "Cargo vessel of medium size designed to transport 80-120 DWT"@en,
-        "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
-
-sc:Suezmax a owl:Class ;
-    rdfs:label "Suezmax"@en,
-        "Suezmax"@es ;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en,
-        "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
-
-sc:VLGCC a owl:Class ;
-    rdfs:label "VLGCC"@en,
-        "VLGCC"@es ;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:altLabel "Very Large Crude Carrier" ;
-    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en,
-        "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
-
-sc:Vessel a owl:Class ;
-    rdfs:label "Vessel"@en,
-        "Buque"@es ;
-    rdfs:subClassOf sc:Thing ;
-    skos:definition "Cargo vehicle designed to transport goods across water bodies."@en,
-        "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es ;
-    skos:scopeNote "In the scope of this ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
-        "En el alcance de esta ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
-
 sc:isLoaded a owl:DatatypeProperty ;
     rdfs:label "is loaded"@en,
         "está cargado"@es ;
+    rdfs:domain sc:Vessel ;
     rdfs:range xsd:boolean ;
     skos:definition "Whether the vehicle has crude oil cargo loaded in"@en,
         "Si el buque tiene carga de crudo cargada en sus bodegas"@es .
@@ -66,11 +39,32 @@ sc:isLoaded a owl:DatatypeProperty ;
     owl:versionIRI <https://w3id.org/seaborne-crude/logistics/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
-sc:AfraClass a owl:Class ;
-    rdfs:label "Afra Class"@en,
-        "Clase Afra"@es ;
-    rdfs:seeAlso <https://www.eia.gov/todayinenergy/detail.php?id=17991> ;
-    rdfs:subClassOf sc:Thing ;
-    skos:definition "Size class of the vehicle according to the Afra scale, as defined in [seeAlso]."@en,
-        "Clase de tamaño del vehículo según la escala Afra, según se define en [seeAlso]."@es .
+sc:Aframax a owl:Class ;
+    rdfs:label "Aframax"@en,
+        "Aframax"@es ;
+    rdfs:subClassOf sc:Vessel ;
+    skos:definition "Cargo vessel of medium size designed to transport 80,000-120,000 DWT"@en,
+        "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
 
+sc:Suezmax a owl:Class ;
+    rdfs:label "Suezmax"@en,
+        "Suezmax"@es ;
+    rdfs:subClassOf sc:Vessel ;
+    skos:definition "Cargo vessel of medium-large size designed to transport 120,000-200,000 DWT"@en,
+        "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
+
+sc:VLCC a owl:Class ;
+    rdfs:label "VLCC"@en,
+        "VLCC"@es ;
+    rdfs:subClassOf sc:Vessel ;
+    skos:altLabel "Very Large Crude Carrier"@en ;
+    skos:definition "Very large crude carrier designed to transport 200,000 DWT or more"@en,
+        "Buque petrolero de gran tamaño diseñado para transportar 200,000 toneladas de peso muerto o más"@es .
+
+sc:Vessel a owl:Class ;
+    rdfs:label "Vessel"@en,
+        "Buque"@es ;
+    skos:definition "Cargo vehicle designed to transport goods across water bodies."@en,
+        "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es ;
+    skos:scopeNote "In the scope of this ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
+        "En el alcance de esta ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
