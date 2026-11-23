@@ -28,16 +28,14 @@ skos:exactMatch a owl:AnnotationProperty .
 
 <https://w3id.org/seaborne-crude/alignments> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
-    dcterms:description "Bridge module aligning the seaborne-crude domain ontology with external vocabularies (OWL-Time, QUDT, FIBO, PMDCo Logistics, and deferred GLEIF)."@en,
-        "Módulo puente que alinea la ontología de comercio marítimo de crudo con vocabularios externos (OWL-Time, QUDT, FIBO, PMDCo Logistics y GLEIF diferido)."@es ;
+    dcterms:description "Bridge module aligning the seaborne-crude domain ontology with external vocabularies (QUDT, FIBO, PMDCo Logistics, and deferred GLEIF)."@en,
+        "Módulo puente que alinea la ontología de comercio marítimo de crudo con vocabularios externos (QUDT, FIBO, PMDCo Logistics y GLEIF diferido)."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: External Alignments Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo de Alineamientos Externos"@es ;
     rdfs:comment "GLEIF: deferred to PEC4 (out of scope for Iteration 1). Align entities.ttl with GLEIF L1/L2 in PEC4."@en,
-        "OWL-Time (http://www.w3.org/2006/time) is imported directly via local catalog-v001.xml. QUDT, FIBO, and PMDCo Logistics use lightweight IRI alignment stubs (locked decision); GLEIF is deferred to PEC4."@en,
-        "OWL-Time pending alignments (once Laycan is defined in logistics/time): sc:Laycan rdfs:subClassOf time:Interval; sc:hasLaycanStart rdfs:subPropertyOf time:hasBeginning; sc:hasLaycanEnd rdfs:subPropertyOf time:hasEnd."@en,
+        "QUDT, FIBO, and PMDCo Logistics use lightweight soft IRI alignment stubs without owl:imports."@en,
         "PMDCo Logistics: IRI alignment (locked). TODO(verify) — add verified PMDCo Logistics class/property IRIs once selected."@en ;
-    owl:imports <http://www.w3.org/2006/time> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/alignments/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
