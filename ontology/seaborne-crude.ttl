@@ -22,11 +22,12 @@ skos:definition a owl:AnnotationProperty .
     dcterms:description "Modular OWL 2 DL integrator ontology for physical seaborne-traded crude oil sales contracts, Incoterms (FOB, CFR, CIF, DAP), logistics, laycan, crude quality and Business groups."@en,
         "Ontología integradora modular en OWL 2 DL para contratos físicos de compraventa marítima de crudo, Incoterms (FOB, CFR, CIF, DAP), logística, ventana laycan, calidad del crudo y grupos empresariales."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:title "Seaborne-traded Crude Oil Ontology"@en,
+    dcterms:title "Seaborne-Traded Crude Oil Ontology"@en,
         "Ontología para la Compraventa Física y Transporte Marítimo de Crudo"@es ;
     vann:preferredNamespacePrefix "sc" ;
     vann:preferredNamespaceUri "https://w3id.org/seaborne-crude#" ;
-    owl:imports <https://w3id.org/seaborne-crude/logistics> ;
+    owl:imports <https://w3id.org/seaborne-crude/core-contract>,
+        <https://w3id.org/seaborne-crude/logistics> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
