@@ -1,5 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -16,8 +17,6 @@ dcterms:title a owl:AnnotationProperty .
 skos:altLabel a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
-
-skos:note a owl:AnnotationProperty .
 
 sc:SpotContract a owl:Class ;
     rdfs:label "Spot Contract"@en,
@@ -37,6 +36,24 @@ sc:backedByRecap a owl:FunctionalProperty,
     skos:definition "Links a physical crude oil sales contract to the deal recap confirming its negotiated commercial terms."@en,
         "Vincula un contrato físico de compraventa de crudo con el resumen de operación que confirma sus términos comerciales negociados."@es .
 
+sc:contractDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "contract date"@en,
+        "fecha del contrato"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:date ;
+    skos:definition "Date on which the contract was signed."@en,
+        "Fecha en la que se firmó el contrato."@es .
+
+sc:contractId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "contract ID"@en,
+        "id del contrato"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:string ;
+    skos:definition "Unique identifier of a contract."@en,
+        "Identificador único de un contrato."@es .
+
 sc:hasBuyer a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "has buyer"@en,
@@ -45,6 +62,24 @@ sc:hasBuyer a owl:FunctionalProperty,
     rdfs:range sc:Party ;
     skos:definition "Links a physical crude oil sales contract to the party buying and receiving the crude oil."@en,
         "Vincula un contrato físico de compraventa de crudo con la parte que compra y recibe el crudo."@es .
+
+sc:hasContractedVolume a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has contracted volume"@en,
+        "tiene volumen contratado"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:VolumeQuantity ;
+    skos:definition "Links a physical crude oil sales contract to its contracted volume quantity."@en,
+        "Vincula un contrato físico de compraventa de crudo con su cantidad de volumen contratada."@es .
+
+sc:hasQuantityUnit a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has quantity unit"@en,
+        "tiene unidad de cantidad"@es ;
+    rdfs:domain sc:VolumeQuantity ;
+    rdfs:range sc:QuantityUnit ;
+    skos:definition "Links a volume quantity to its unit of measure (such as barrel or metric tonne)."@en,
+        "Vincula una cantidad de volumen con su unidad de medida (como barril o tonelada métrica)."@es .
 
 sc:hasSeller a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -74,15 +109,40 @@ sc:nominationNoticeDays a owl:DatatypeProperty,
     skos:definition "Minimum number of days before the first day of the laycan required to submit a valid vessel nomination."@en,
         "Número mínimo de días previos al primer día de la ventana de carga (laycan) requeridos para presentar una nominación de buque válida."@es .
 
+sc:operationalTolerancePercent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "operational tolerance percent"@en,
+        "porcentaje de tolerancia operativa"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Permitted percentage deviation (+/-) around the contracted volume for cargo loading."@en,
+        "Desviación porcentual permitida (+/-) respecto al volumen contratado para la carga del buque."@es .
+
+sc:quantityValue a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "quantity value"@en,
+        "valor de cantidad"@es ;
+    rdfs:domain sc:VolumeQuantity ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Numeric magnitude of a volume quantity in its associated unit."@en,
+        "Magnitud numérica de una cantidad de volumen en su unidad asociada."@es .
+
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
-    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, and operational tolerance."@en,
-        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes, volumen contractual y tolerancia operativa."@es ;
+    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, operational tolerance, price basis, and payment terms."@en,
+        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes y volumen contractual, tolerancia operativa, base de precios y términos de pago."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: Core Contract Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo Central de Contratos"@es ;
     owl:versionIRI <https://w3id.org/seaborne-crude/core-contract/0.1.0> ;
     owl:versionInfo "0.1.0" .
+
+sc:Barrel a owl:NamedIndividual,
+        sc:QuantityUnit ;
+    rdfs:label "Barrel (bbl)"@en,
+        "Barril (bbl)"@es ;
+    skos:definition "US petroleum barrel (42 US gallons) at 60 degrees Fahrenheit."@en,
+        "Barril petrolero estadounidense (42 galones estadounidenses) a 60 grados Fahrenheit."@es .
 
 sc:DealRecap a owl:Class ;
     rdfs:label "Deal Recap"@en,
@@ -91,6 +151,13 @@ sc:DealRecap a owl:Class ;
     owl:disjointWith sc:GTC ;
     skos:definition "Summary of the key commercial terms of a physical crude oil trade, typically used for communication between buyer and seller before a formal contract is issued."@en,
         "Resumen de los términos comerciales clave de una operación de compraventa de crudo físico, utilizado normalmente para la comunicación entre comprador y vendedor antes de la emisión de un contrato formal."@es .
+
+sc:MetricTonne a owl:NamedIndividual,
+        sc:QuantityUnit ;
+    rdfs:label "Metric Tonne (MT)"@en,
+        "Tonelada Métrica (MT)"@es ;
+    skos:definition "Metric tonne (1,000 kg) used in shipping and crude oil bills of lading."@en,
+        "Tonelada métrica (1.000 kg) utilizada en transporte marítimo y conocimientos de embarque de crudo."@es .
 
 sc:TermContract a owl:Class ;
     rdfs:label "Term Contract"@en,
@@ -116,6 +183,18 @@ sc:hasContractDocument a owl:ObjectProperty ;
     skos:definition "Links a physical crude oil sales contract to one of its constituent contractual documents."@en,
         "Vincula un contrato físico de compraventa de crudo con uno de sus documentos contractuales constitutivos."@es .
 
+sc:QuantityUnit a owl:Class ;
+    rdfs:label "Quantity Unit"@en,
+        "Unidad de Cantidad"@es ;
+    skos:definition "Unit of measure used to express physical crude oil quantities."@en,
+        "Unidad de medida utilizada para expresar cantidades físicas de crudo."@es .
+
+sc:VolumeQuantity a owl:Class ;
+    rdfs:label "Volume Quantity"@en,
+        "Cantidad de Volumen"@es ;
+    skos:definition "Measured or contracted quantity of crude oil paired with its unit of measure."@en,
+        "Cantidad medida o contratada de crudo junto con su unidad de medida."@es .
+
 sc:Party a owl:Class ;
     rdfs:label "Party"@en,
         "Parte"@es ;
@@ -125,108 +204,20 @@ sc:Party a owl:Class ;
 sc:ContractDocument a owl:Class ;
     rdfs:label "Contract Document"@en,
         "Documento Contractual"@es ;
+    owl:disjointWith sc:Party ;
     skos:definition "Document that contains contractual terms agreed by the parties involved in a transaction."@en,
         "Documento que contiene los términos contractuales acordados por las partes implicadas en una transacción."@es .
 
 sc:PhysicalCrudeContract a owl:Class ;
     rdfs:label "Physical Crude Contract"@en,
         "Contrato Físico de Crudo"@es ;
+    owl:disjointWith sc:ContractDocument,
+        sc:Party ;
     skos:definition "Physical crude oil sales contract."@en,
         "Contrato físico de compraventa de crudo."@es ;
     skos:note "Is disjoint, must be either spot or term contract"@en,
         "Es disjunto, debe ser contrato spot o contrato a término"@es .
 
-sc:contractId a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "contract ID"@en,
-        "id del contrato"@es ;
-    rdfs:domain sc:PhysicalCrudeContract ;
-    rdfs:range xsd:string ;
-    skos:definition "Unique identifier of a contract."@en,
-        "Identificador único de un contrato."@es .
-
-sc:contractDate a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "contract date"@en,
-        "fecha del contrato"@es ;
-    rdfs:domain sc:PhysicalCrudeContract ;
-    rdfs:range xsd:date ;
-    skos:definition "Date on which the contract was signed."@en,
-        "Fecha en la que se firmó el contrato."@es .
-
-sc:VolumeQuantity a owl:Class ;
-    rdfs:label "Volume Quantity"@en,
-        "Cantidad de Volumen"@es ;
-    skos:definition "Measured or contracted quantity of crude oil paired with its unit of measure."@en,
-        "Cantidad medida o contratada de crudo junto con su unidad de medida."@es .
-
-sc:QuantityUnit a owl:Class ;
-    rdfs:label "Quantity Unit"@en,
-        "Unidad de Cantidad"@es ;
-    skos:definition "Unit of measure used to express physical crude oil quantities."@en,
-        "Unidad de medida utilizada para expresar cantidades físicas de crudo."@es .
-
-sc:Barrel a owl:NamedIndividual,
-        sc:QuantityUnit ;
-    rdfs:label "Barrel (bbl)"@en,
-        "Barril (bbl)"@es ;
-    skos:definition "US petroleum barrel (42 US gallons) at 60 degrees Fahrenheit."@en,
-        "Barril petrolero estadounidense (42 galones estadounidenses) a 60 grados Fahrenheit."@es .
-
-sc:MetricTonne a owl:NamedIndividual,
-        sc:QuantityUnit ;
-    rdfs:label "Metric Tonne (MT)"@en,
-        "Tonelada Métrica (MT)"@es ;
-    skos:definition "Metric tonne (1,000 kg) used in shipping and crude oil bills of lading."@en,
-        "Tonelada métrica (1.000 kg) utilizada en transporte marítimo y conocimientos de embarque de crudo."@es .
-
-sc:hasContractedVolume a owl:FunctionalProperty,
-        owl:ObjectProperty ;
-    rdfs:label "has contracted volume"@en,
-        "tiene volumen contratado"@es ;
-    rdfs:domain sc:PhysicalCrudeContract ;
-    rdfs:range sc:VolumeQuantity ;
-    skos:definition "Links a physical crude oil sales contract to its contracted volume quantity."@en,
-        "Vincula un contrato físico de compraventa de crudo con su cantidad de volumen contratada."@es .
-
-sc:hasQuantityUnit a owl:FunctionalProperty,
-        owl:ObjectProperty ;
-    rdfs:label "has quantity unit"@en,
-        "tiene unidad de cantidad"@es ;
-    rdfs:domain sc:VolumeQuantity ;
-    rdfs:range sc:QuantityUnit ;
-    skos:definition "Links a volume quantity to its unit of measure (such as barrel or metric tonne)."@en,
-        "Vincula una cantidad de volumen con su unidad de medida (como barril o tonelada métrica)."@es .
-
-sc:quantityValue a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "quantity value"@en,
-        "valor de cantidad"@es ;
-    rdfs:domain sc:VolumeQuantity ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Numeric magnitude of a volume quantity in its associated unit."@en,
-        "Magnitud numérica de una cantidad de volumen en su unidad asociada."@es .
-
-sc:operationalTolerancePercent a owl:DatatypeProperty,
-        owl:FunctionalProperty ;
-    rdfs:label "operational tolerance percent"@en,
-        "porcentaje de tolerancia operativa"@es ;
-    rdfs:domain sc:PhysicalCrudeContract ;
-    rdfs:range xsd:decimal ;
-    skos:definition "Permitted percentage deviation (+/-) around the contracted volume for cargo loading."@en,
-        "Desviación porcentual permitida (+/-) respecto al volumen contratado para la carga del buque."@es .
-
-[] a owl:AllDisjointClasses ;
-    owl:members (
-        sc:PhysicalCrudeContract
-        sc:ContractDocument
-        sc:Party
-        sc:VolumeQuantity
-        sc:QuantityUnit
-    ) .
-
 [] a owl:AllDifferent ;
-    owl:distinctMembers (
-        sc:Barrel
-        sc:MetricTonne
-    ) .
+    owl:distinctMembers ( sc:Barrel sc:MetricTonne ) .
+
