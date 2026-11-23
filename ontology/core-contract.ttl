@@ -19,15 +19,15 @@ sc:SpotContract a owl:Class ;
         "Contrato Spot"@es ;
     rdfs:subClassOf sc:Contract ;
     owl:disjointWith sc:TermContract ;
-    skos:definition "Spot contract is an agreement to buy or sell an asset at the current market price (spot price or spot rate)"@en,
-        "Un contrato spot es un acuerdo para comprar o vender un activo al precio actual de mercado (precio spot o tarifa spot)"@es .
+    skos:definition "Physical crude oil sales contract for a single cargo or parcel with immediate or near-term delivery."@en,
+        "Contrato físico de compraventa de crudo para un único cargamento o lote con entrega inmediata o a corto plazo."@es .
 
 sc:TermContract a owl:Class ;
     rdfs:label "Term Contract"@en,
         "Contrato a Término"@es ;
     rdfs:subClassOf sc:Contract ;
-    skos:definition "A term contract is an agreement to buy or sell an asset at a future date at a price that is agreed upon at the time the contract is made"@en,
-        "Un contrato a término es un acuerdo para comprar o vender un activo en una fecha futura a un precio que se acuerda en el momento en que se celebra el contrato"@es .
+    skos:definition "Ongoing physical crude oil sales contract covering multiple scheduled cargoes over an agreed period."@en,
+        "Contrato físico continuo de compraventa de crudo que cubre múltiples cargamentos programados durante un período acordado."@es .
 
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
