@@ -17,17 +17,10 @@ skos:definition a owl:AnnotationProperty .
 sc:SpotContract a owl:Class ;
     rdfs:label "Spot Contract"@en,
         "Contrato Spot"@es ;
-    rdfs:subClassOf sc:Contract ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
     owl:disjointWith sc:TermContract ;
     skos:definition "Physical crude oil sales contract for a single cargo or parcel with immediate or near-term delivery."@en,
         "Contrato físico de compraventa de crudo para un único cargamento o lote con entrega inmediata o a corto plazo."@es .
-
-sc:TermContract a owl:Class ;
-    rdfs:label "Term Contract"@en,
-        "Contrato a Término"@es ;
-    rdfs:subClassOf sc:Contract ;
-    skos:definition "Ongoing physical crude oil sales contract covering multiple scheduled cargoes over an agreed period."@en,
-        "Contrato físico continuo de compraventa de crudo que cubre múltiples cargamentos programados durante un período acordado."@es .
 
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -39,9 +32,16 @@ sc:TermContract a owl:Class ;
     owl:versionIRI <https://w3id.org/seaborne-crude/core-contract/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
-sc:Contract a owl:Class ;
-    rdfs:label "Contract"@en,
-        "Contrato"@es ;
-    skos:definition "Contract between a seller and a buyer."@en,
-        "Contrato entre un vendedor y un comprador."@es .
+sc:TermContract a owl:Class ;
+    rdfs:label "Term Contract"@en,
+        "Contrato a Término"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    skos:definition "Ongoing physical crude oil sales contract covering multiple scheduled cargoes over an agreed period."@en,
+        "Contrato físico continuo de compraventa de crudo que cubre múltiples cargamentos programados durante un período acordado."@es .
+
+sc:PhysicalCrudeContract a owl:Class ;
+    rdfs:label "Physical Crude Contract"@en,
+        "Contrato Físico de Crudo"@es ;
+    skos:definition "Physical crude oil sales contract."@en,
+        "Contrato físico de compraventa de crudo."@es .
 
