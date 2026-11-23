@@ -26,11 +26,11 @@ skos:definition a owl:AnnotationProperty .
         "Ontología para la Compraventa Física y Transporte Marítimo de Crudo"@es ;
     vann:preferredNamespacePrefix "sc" ;
     vann:preferredNamespaceUri "https://w3id.org/seaborne-crude#" ;
-    owl:imports <https://w3id.org/seaborne-crude/core-contract>,
+    owl:imports <https://w3id.org/seaborne-crude/alignments>,
+        <https://w3id.org/seaborne-crude/core-contract>,
         <https://w3id.org/seaborne-crude/incoterms>,
         <https://w3id.org/seaborne-crude/logistics>,
-        <https://w3id.org/seaborne-crude/quality>,
-        <https://w3id.org/seaborne-crude/entities> ;
+        <https://w3id.org/seaborne-crude/quality> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
