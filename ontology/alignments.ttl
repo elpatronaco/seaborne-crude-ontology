@@ -34,8 +34,8 @@ skos:exactMatch a owl:AnnotationProperty .
     dcterms:title "Seaborne-Traded Crude Oil Ontology: External Alignments Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo de Alineamientos Externos"@es ;
     rdfs:comment "GLEIF: deferred to PEC4 (out of scope for Iteration 1). Align entities.ttl with GLEIF L1/L2 in PEC4."@en,
-        "QUDT, FIBO, and PMDCo Logistics use lightweight soft IRI alignment stubs without owl:imports."@en,
-        "PMDCo Logistics: IRI alignment (locked). TODO(verify) — add verified PMDCo Logistics class/property IRIs once selected."@en ;
+        "PMDCo Logistics: IRI alignment (locked). TODO(verify) — add verified PMDCo Logistics class/property IRIs once selected."@en,
+        "QUDT, FIBO, and PMDCo Logistics use lightweight soft IRI alignment stubs without owl:imports."@en ;
     owl:versionIRI <https://w3id.org/seaborne-crude/alignments/0.1.0> ;
     owl:versionInfo "0.1.0" .
 

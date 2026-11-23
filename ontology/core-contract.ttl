@@ -1,5 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 dcterms:creator a owl:AnnotationProperty .
@@ -12,6 +14,20 @@ dcterms:title a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
+sc:SpotContract a owl:Class ;
+    rdfs:label "Spot Contract"@en,
+        "Contrato Spot"@es ;
+    rdfs:subClassOf sc:Contract ;
+    skos:definition "Spot contract is an agreement to buy or sell an asset at the current market price (spot price or spot rate)"@en,
+        "Un contrato spot es un acuerdo para comprar o vender un activo al precio actual de mercado (precio spot o tarifa spot)"@es .
+
+sc:TermContract a owl:Class ;
+    rdfs:label "Term Contract"@en,
+        "Contrato a Término"@es ;
+    rdfs:subClassOf sc:Contract ;
+    skos:definition "A term contract is an agreement to buy or sell an asset at a future date at a price that is agreed upon at the time the contract is made"@en,
+        "Un contrato a término es un acuerdo para comprar o vender un activo en una fecha futura a un precio que se acuerda en el momento en que se celebra el contrato"@es .
+
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, operational tolerance, price basis, and payment terms."@en,
@@ -21,4 +37,10 @@ skos:definition a owl:AnnotationProperty .
         "Ontología de Comercio Marítimo de Crudo: Módulo Central de Contratos"@es ;
     owl:versionIRI <https://w3id.org/seaborne-crude/core-contract/0.1.0> ;
     owl:versionInfo "0.1.0" .
+
+sc:Contract a owl:Class ;
+    rdfs:label "Contract"@en,
+        "Contrato"@es ;
+    skos:definition "Contract between a seller and a buyer."@en,
+        "Contrato entre un vendedor y un comprador."@es .
 
