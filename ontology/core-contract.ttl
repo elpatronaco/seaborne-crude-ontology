@@ -45,3 +45,19 @@ sc:PhysicalCrudeContract a owl:Class ;
     skos:definition "Physical crude oil sales contract."@en,
         "Contrato físico de compraventa de crudo."@es .
 
+sc:DealRecap a owl:Class ;
+    rdfs:label "Deal Recap"@en,
+        "Resumen de Operación"@es ;
+    skos:definition "Summary of the key commercial terms of a physical crude oil trade, typically used for communication between buyer and seller before a formal contract is issued."@en,
+        "Resumen de los términos comerciales clave de una operación de compraventa de crudo físico, utilizado normalmente para la comunicación entre comprador y vendedor antes de la emisión de un contrato formal."@es .
+
+sc:GTC a owl:Class ;
+    rdfs:label "General Terms and Conditions"@en ,
+        "Términos y Condiciones Generales"@es ;
+    skos:altLabel "GT&Cs"@en,
+        "T&Cs"@en ;
+    skos:definition "Standard, pre-drafted clauses that set the baseline rules for commercial transactions between businesses, not specific to any single deal"@en,
+        "Cláusulas estándares y pre-redactadas que establecen las reglas básicas para las transacciones comerciales entre empresas, no específicas para una única operación"@es .
+    
+
+        
