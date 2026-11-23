@@ -3,6 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcterms:creator a owl:AnnotationProperty .
 
@@ -20,6 +21,12 @@ sc:Vessel a owl:Class ;
     rdfs:subClassOf sc:Thing ;
     skos:definition "Cargo vehicle designed to transport goods across water bodies."@en,
         "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es .
+
+sc:isLoaded a owl:DatatypeProperty ;
+    rdfs:label "is loaded"@en, "está cargado"@es;
+    skos:definition "Whether the vehicle has cargo loaded in"@en, "Si el buque tiene carga cargada en sus bodegas"@es ;
+    rdfs:range xsd:boolean .
+    
 
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
