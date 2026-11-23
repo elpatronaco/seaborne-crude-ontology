@@ -17,6 +17,8 @@ skos:altLabel a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
+skos:note a owl:AnnotationProperty .
+
 sc:SpotContract a owl:Class ;
     rdfs:label "Spot Contract"@en,
         "Contrato Spot"@es ;
@@ -74,8 +76,8 @@ sc:nominationNoticeDays a owl:DatatypeProperty,
 
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
-    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, operational tolerance, price basis, and payment terms."@en,
-        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes y volumen contractual, tolerancia operativa, base de precios y términos de pago."@es ;
+    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, and operational tolerance."@en,
+        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes, volumen contractual y tolerancia operativa."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: Core Contract Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo Central de Contratos"@es ;
@@ -123,15 +125,12 @@ sc:Party a owl:Class ;
 sc:ContractDocument a owl:Class ;
     rdfs:label "Contract Document"@en,
         "Documento Contractual"@es ;
-    owl:disjointWith sc:Party ;
     skos:definition "Document that contains contractual terms agreed by the parties involved in a transaction."@en,
         "Documento que contiene los términos contractuales acordados por las partes implicadas en una transacción."@es .
 
 sc:PhysicalCrudeContract a owl:Class ;
     rdfs:label "Physical Crude Contract"@en,
         "Contrato Físico de Crudo"@es ;
-    owl:disjointWith sc:ContractDocument,
-        sc:Party ;
     skos:definition "Physical crude oil sales contract."@en,
         "Contrato físico de compraventa de crudo."@es ;
     skos:note "Is disjoint, must be either spot or term contract"@en,
@@ -217,9 +216,17 @@ sc:operationalTolerancePercent a owl:DatatypeProperty,
     skos:definition "Permitted percentage deviation (+/-) around the contracted volume for cargo loading."@en,
         "Desviación porcentual permitida (+/-) respecto al volumen contratado para la carga del buque."@es .
 
+[] a owl:AllDisjointClasses ;
+    owl:members (
+        sc:PhysicalCrudeContract
+        sc:ContractDocument
+        sc:Party
+        sc:VolumeQuantity
+        sc:QuantityUnit
+    ) .
+
 [] a owl:AllDifferent ;
     owl:distinctMembers (
         sc:Barrel
         sc:MetricTonne
     ) .
-
