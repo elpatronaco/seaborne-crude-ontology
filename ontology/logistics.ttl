@@ -17,6 +17,28 @@ skos:definition a owl:AnnotationProperty .
 
 skos:scopeNote a owl:AnnotationProperty .
 
+sc:Aframax a owl:Class ;
+    rdfs:label "Aframax"@en,
+        "Aframax"@es ;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:definition "Cargo vessel of medium size designed to transport 80-120 DWT"@en,
+        "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
+
+sc:Suezmax a owl:Class ;
+    rdfs:label "Suezmax"@en,
+        "Suezmax"@es ;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en,
+        "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
+
+sc:VLGCC a owl:Class ;
+    rdfs:label "VLGCC"@en,
+        "VLGCC"@es ;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:altLabel "Very Large Crude Carrier" ;
+    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en,
+        "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
+
 sc:Vessel a owl:Class ;
     rdfs:label "Vessel"@en,
         "Buque"@es ;
@@ -27,31 +49,11 @@ sc:Vessel a owl:Class ;
         "En el alcance de esta ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
 
 sc:isLoaded a owl:DatatypeProperty ;
-    rdfs:label "is loaded"@en, "está cargado"@es;
-    skos:definition "Whether the vehicle has crude oil cargo loaded in"@en, "Si el buque tiene carga de crudo cargada en sus bodegas"@es ;
-    rdfs:range xsd:boolean .
-    
-sc:AfraClass a owl:Class ;
-    rdfs:label "Afra Class"@en, "Clase Afra"@es;
-    rdfs:subClassOf sc:Thing ;
-    skos:definition "Size class of the vehicle according to the Afra scale, as defined in [seeAlso]."@en, "Clase de tamaño del vehículo según la escala Afra, según se define en [seeAlso]."@es ;
-    rdfs:seeAlso <https://www.eia.gov/todayinenergy/detail.php?id=17991> .
-
-sc:Aframax a owl:Class ;
-    rdfs:label "Aframax"@en, "Aframax"@es;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:definition "Cargo vessel of medium size designed to transport 80-120 DWT"@en, "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
-
-sc:Suezmax a owl:Class ;
-    rdfs:label "Suezmax"@en, "Suezmax"@es;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en, "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
-
-sc:VLGCC a owl:Class ;
-    rdfs:label "VLGCC"@en, "VLGCC"@es;
-    skos:altLabel "Very Large Crude Carrier" ;
-    rdfs:subClassOf sc:AfraClass ;
-    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en, "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
+    rdfs:label "is loaded"@en,
+        "está cargado"@es ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Whether the vehicle has crude oil cargo loaded in"@en,
+        "Si el buque tiene carga de crudo cargada en sus bodegas"@es .
 
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -63,4 +65,12 @@ sc:VLGCC a owl:Class ;
     owl:imports <http://www.w3.org/2006/time> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/logistics/0.1.0> ;
     owl:versionInfo "0.1.0" .
+
+sc:AfraClass a owl:Class ;
+    rdfs:label "Afra Class"@en,
+        "Clase Afra"@es ;
+    rdfs:seeAlso <https://www.eia.gov/todayinenergy/detail.php?id=17991> ;
+    rdfs:subClassOf sc:Thing ;
+    skos:definition "Size class of the vehicle according to the Afra scale, as defined in [seeAlso]."@en,
+        "Clase de tamaño del vehículo según la escala Afra, según se define en [seeAlso]."@es .
 

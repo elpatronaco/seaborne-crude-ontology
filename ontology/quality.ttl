@@ -14,8 +14,8 @@ skos:definition a owl:AnnotationProperty .
 
 <https://w3id.org/seaborne-crude/quality> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
-    dcterms:description "Module formalizing Crude quality terms: guaranteed and typical specification, measured qualities like API gravity, density, sulfur content and viscosity limits."@en,
-        "Módulo que formaliza los términos de calidad del crudo: especificación garantizada y típica, calidades medidas como gravedad API, densidad, contenido de azufre y límites de viscosidad."@es ;
+    dcterms:description "Module formalizing crude quality terms: guaranteed and typical specifications, and measured API gravity and sulfur content."@en,
+        "Módulo que formaliza los términos de calidad del crudo: especificaciones garantizadas y típicas, y valores medidos de gravedad API y contenido de azufre."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: Crude Quality Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo de Calidad del Crudo"@es ;

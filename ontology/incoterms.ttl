@@ -14,30 +14,37 @@ dcterms:title a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
-sc:FOB a owl:Class ;
-    rdfs:label "FOB" ;
-    skos:altLabel "Free on Board"@en,
-        "Libre a bordo"@es ;
-    skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage"@en, "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro"@es ;
-    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/free-on-board-fob/> .
+sc:CFR a owl:Class ;
+    rdfs:label "CFR" ;
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-and-freight-cfr/> ;
+    skos:altLabel "Cost and Freight"@en,
+        "Coste y Flete"@es ;
+    skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship"@en,
+        "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es .
 
 sc:CIF a owl:Class ;
     rdfs:label "CIF" ;
-    skos:altLabel "Cost, Insurance and Freight"@en, "Coste, Seguro y Flete"@es ;
-    skos:definition "Seller pays for cost, freight and a minimum insurance coverage on behalf of buyer. Risk is transferred when goods are on the ship"@en, "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es ;
-    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-insurance-and-freight-cif/> .
-
-sc:CFR a owl:Class ;
-    rdfs:label "CFR" ;
-    skos:altLabel "Cost and Freight"@en, "Coste y Flete"@es ;
-    skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship"@en, "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es ;
-    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-and-freight-cfr/> .
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-insurance-and-freight-cif/> ;
+    skos:altLabel "Cost, Insurance and Freight"@en,
+        "Coste, Seguro y Flete"@es ;
+    skos:definition "Seller pays for cost, freight and a minimum insurance coverage on behalf of buyer. Risk is transferred when goods are on the ship"@en,
+        "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es .
 
 sc:DAP a owl:Class ;
     rdfs:label "DAP" ;
-    skos:altLabel "Delivered at Place"@en, "Entrega en el Lugar"@es ;
-    skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point"@en, "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto"@es ;
-    rdfs:seeAlso <https://www.dhl.com/discover/en-hk/logistics-advice/import-export-advice/dap-delivered-at-place> .
+    rdfs:seeAlso <https://www.dhl.com/discover/en-hk/logistics-advice/import-export-advice/dap-delivered-at-place> ;
+    skos:altLabel "Delivered at Place"@en,
+        "Entrega en el Lugar"@es ;
+    skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point"@en,
+        "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto"@es .
+
+sc:FOB a owl:Class ;
+    rdfs:label "FOB" ;
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/free-on-board-fob/> ;
+    skos:altLabel "Free on Board"@en,
+        "Libre a bordo"@es ;
+    skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage"@en,
+        "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro"@es .
 
 sc:Incoterm a owl:Class ;
     rdfs:label "Incoterm"@en,
