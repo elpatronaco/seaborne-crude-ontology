@@ -17,8 +17,8 @@ skos:definition a owl:AnnotationProperty .
     dcterms:description "Module covering cargoes, tankers by AFRA size class (Aframax, Suezmax, VLCC), load/discharge ports, vessel nomination, Notice of Readiness (NOR), loading events, and laycan intervals using OWL-Time vocabulary."@en,
         "Módulo que cubre cargamentos, buques petroleros por clase AFRA (Aframax, Suezmax, VLCC), puertos de carga y descarga, nominación del buque, Notice of Readiness (NOR), eventos de carga e intervalos laycan mediante el vocabulario OWL-Time."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:title "Seaborne Crude Ontology — Logistics & Laycan Module"@en,
-        "Ontología de Crudo Marítimo — Módulo de Logística y Laycan"@es ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology — Logistics & Laycan Module"@en,
+        "Ontología de Comercio Marítimo de Crudo — Módulo de Logística y Laycan"@es ;
     owl:imports <http://www.w3.org/2006/time> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/logistics/0.1.0> ;
     owl:versionInfo "0.1.0" .
