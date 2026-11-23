@@ -43,6 +43,12 @@ sc:Aframax a owl:Class ;
     rdfs:label "Aframax"@en,
         "Aframax"@es ;
     rdfs:subClassOf sc:Vessel ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Vessel [ a owl:Restriction ;
+                        owl:onProperty sc:deadweightTonnage ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minInclusive 80000.0 ] [ xsd:maxExclusive 120000.0 ] ) ] ] ) ] ;
     skos:definition "Cargo vessel of medium size designed to transport 80,000-120,000 DWT"@en,
         "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
 
@@ -50,6 +56,12 @@ sc:Suezmax a owl:Class ;
     rdfs:label "Suezmax"@en,
         "Suezmax"@es ;
     rdfs:subClassOf sc:Vessel ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Vessel [ a owl:Restriction ;
+                        owl:onProperty sc:deadweightTonnage ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minInclusive 120000.0 ] [ xsd:maxExclusive 200000.0 ] ) ] ] ) ] ;
     skos:definition "Cargo vessel of medium-large size designed to transport 120,000-200,000 DWT"@en,
         "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
 
@@ -57,9 +69,24 @@ sc:VLCC a owl:Class ;
     rdfs:label "VLCC"@en,
         "VLCC"@es ;
     rdfs:subClassOf sc:Vessel ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Vessel [ a owl:Restriction ;
+                        owl:onProperty sc:deadweightTonnage ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minInclusive 200000.0 ] ) ] ] ) ] ;
     skos:altLabel "Very Large Crude Carrier"@en ;
     skos:definition "Very large crude carrier designed to transport 200,000 DWT or more"@en,
         "Buque petrolero de gran tamaño diseñado para transportar 200,000 toneladas de peso muerto o más"@es .
+
+sc:deadweightTonnage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "deadweight tonnage"@en,
+        "tonelaje de peso muerto"@es ;
+    rdfs:domain sc:Vessel ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Maximum weight in metric tonnes that a vessel can safely carry, including cargo, fuel, and crew."@en,
+        "Peso máximo en toneladas métricas que un buque puede transportar de forma segura, incluyendo carga, combustible y tripulación."@es .
 
 sc:Vessel a owl:Class ;
     rdfs:label "Vessel"@en,
@@ -68,3 +95,9 @@ sc:Vessel a owl:Class ;
         "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es ;
     skos:scopeNote "In the scope of this ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
         "En el alcance de esta ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:Aframax sc:Suezmax sc:VLCC ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:Vessel sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
