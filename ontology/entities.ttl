@@ -1,0 +1,24 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+<https://w3id.org/seaborne-crude/entities> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Module covering legal entity identification and parent-subsidiary corporate group aggregation using GLEIF L1/L2."@en,
+        "Módulo que cubre la identificación de entidades legales y la agregación jerárquica por grupos corporativos (padres-subsidiarias) utilizando los niveles L1/L2 de GLEIF."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology: Entities Module"@en,
+        "Ontología de Comercio Marítimo de Crudo: Módulo de Entidades"@es ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/entities/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+

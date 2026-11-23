@@ -29,7 +29,8 @@ skos:definition a owl:AnnotationProperty .
     owl:imports <https://w3id.org/seaborne-crude/core-contract>,
         <https://w3id.org/seaborne-crude/incoterms>,
         <https://w3id.org/seaborne-crude/logistics>,
-        <https://w3id.org/seaborne-crude/quality> ;
+        <https://w3id.org/seaborne-crude/quality>,
+        <https://w3id.org/seaborne-crude/entities> ;
     owl:versionIRI <https://w3id.org/seaborne-crude/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
