@@ -2,6 +2,7 @@
 """Phase 1 validation tests: Turtle parsing, module metadata, and ROBOT/HermiT smoke test."""
 
 from pathlib import Path
+import subprocess
 
 import pytest
 from rdflib import Graph, Literal, URIRef
@@ -9,7 +10,9 @@ from rdflib.namespace import DCTERMS, OWL, RDF
 
 ROOT = Path(__file__).resolve().parent.parent
 ONTOLOGY_DIR = ROOT / "ontology"
+CATALOG_PATH = ONTOLOGY_DIR / "catalog-v001.xml"
 INTEGRATOR_PATH = ONTOLOGY_DIR / "seaborne-crude.ttl"
+ROBOT_BIN = ROOT / "tools" / "robot"
 
 CC_BY_4_0 = URIRef("https://creativecommons.org/licenses/by/4.0/")
 
@@ -69,3 +72,35 @@ def test_integrator_imports() -> None:
     }
     assert expected_imports.issubset(imports)
     assert URIRef("https://w3id.org/seaborne-crude/entities") not in imports
+
+
+def test_robot_hermit_reasoner_smoke(tmp_path: Path) -> None:
+    """ROBOT with HermiT must load the catalog-resolved integrator ontology and classify cleanly."""
+    assert ROBOT_BIN.exists(), f"ROBOT wrapper not found at {ROBOT_BIN}; run scripts/install_robot.sh"
+    out_ttl = tmp_path / "inferred.ttl"
+
+    result = subprocess.run(
+        [
+            str(ROBOT_BIN),
+            "reason",
+            "--catalog",
+            str(CATALOG_PATH),
+            "--reasoner",
+            "hermit",
+            "--input",
+            str(INTEGRATOR_PATH),
+            "--output",
+            str(out_ttl),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, (
+        f"ROBOT HermiT failed (rc={result.returncode}):\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
+    )
+    assert out_ttl.exists() and out_ttl.stat().st_size > 0
+
+    inferred = Graph()
+    inferred.parse(out_ttl, format="turtle")
+    assert len(inferred) > 0
