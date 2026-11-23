@@ -1,0 +1,31 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+<https://w3id.org/seaborne-crude> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Modular OWL 2 DL integrator ontology for physical seaborne crude oil sales contracts, Incoterms (FOB, CFR, CIF, DAP), logistics, laycan, and crude quality."@en,
+        "Ontología integradora modular en OWL 2 DL para contratos físicos de compraventa marítima de crudo, Incoterms (FOB, CFR, CIF, DAP), logística, ventana laycan y calidad del crudo."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-traded Crude Oil Ontology"@en,
+        "Ontología para la Compraventa Física y Transporte Marítimo de Crudo"@es ;
+    vann:preferredNamespacePrefix "sc" ;
+    vann:preferredNamespaceUri "https://w3id.org/seaborne-crude#" ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+
