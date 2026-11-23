@@ -9,6 +9,7 @@ from rdflib.namespace import DCTERMS, OWL, RDF
 
 ROOT = Path(__file__).resolve().parent.parent
 ONTOLOGY_DIR = ROOT / "ontology"
+INTEGRATOR_PATH = ONTOLOGY_DIR / "seaborne-crude.ttl"
 
 CC_BY_4_0 = URIRef("https://creativecommons.org/licenses/by/4.0/")
 
@@ -49,3 +50,22 @@ def test_first_party_module_metadata(module_path: Path) -> None:
     titles = list(graph.objects(onto, DCTERMS.title))
     langs = {t.language for t in titles if isinstance(t, Literal)}
     assert {"en", "es"}.issubset(langs), f"{module_path.name} must have dcterms:title in @en and @es"
+
+
+def test_integrator_imports() -> None:
+    """seaborne-crude.ttl must import the 5 active Iteration 1 modules and defer entities.ttl."""
+    graph = Graph()
+    graph.parse(INTEGRATOR_PATH, format="turtle")
+
+    onto = URIRef("https://w3id.org/seaborne-crude")
+    imports = set(graph.objects(onto, OWL.imports))
+
+    expected_imports = {
+        URIRef("https://w3id.org/seaborne-crude/core-contract"),
+        URIRef("https://w3id.org/seaborne-crude/incoterms"),
+        URIRef("https://w3id.org/seaborne-crude/logistics"),
+        URIRef("https://w3id.org/seaborne-crude/quality"),
+        URIRef("https://w3id.org/seaborne-crude/alignments"),
+    }
+    assert expected_imports.issubset(imports)
+    assert URIRef("https://w3id.org/seaborne-crude/entities") not in imports
