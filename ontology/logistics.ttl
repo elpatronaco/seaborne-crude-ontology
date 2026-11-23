@@ -101,3 +101,4 @@ sc:Vessel a owl:Class ;
 
 [] a owl:AllDisjointClasses ;
     owl:members ( sc:Vessel sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+
