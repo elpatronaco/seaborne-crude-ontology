@@ -18,6 +18,7 @@ sc:SpotContract a owl:Class ;
     rdfs:label "Spot Contract"@en,
         "Contrato Spot"@es ;
     rdfs:subClassOf sc:Contract ;
+    owl:disjointWith sc:TermContract ;
     skos:definition "Spot contract is an agreement to buy or sell an asset at the current market price (spot price or spot rate)"@en,
         "Un contrato spot es un acuerdo para comprar o vender un activo al precio actual de mercado (precio spot o tarifa spot)"@es .
 
