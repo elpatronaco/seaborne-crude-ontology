@@ -137,3 +137,21 @@ sc:PhysicalCrudeContract a owl:Class ;
     skos:note "Is disjoint, must be either spot or term contract"@en,
         "Es disjunto, debe ser contrato spot o contrato a término"@es .
 
+sc:contractId a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "contract ID"@en,
+        "id del contrato"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:string ;
+    skos:definition "Unique identifier of a contract."@en,
+        "Identificador único de un contrato."@es .
+
+sc:contractDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "contract date"@en,
+        "fecha del contrato"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range xsd:date ;
+    skos:definition "Date on which the contract was signed."@en,
+        "Fecha en la que se firmó el contrato."@es .
+
