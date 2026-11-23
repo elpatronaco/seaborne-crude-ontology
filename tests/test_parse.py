@@ -4,11 +4,15 @@
 from pathlib import Path
 
 import pytest
-from rdflib import Graph
+from rdflib import Graph, Literal, URIRef
+from rdflib.namespace import DCTERMS, OWL, RDF
 
 ROOT = Path(__file__).resolve().parent.parent
 ONTOLOGY_DIR = ROOT / "ontology"
 
+CC_BY_4_0 = URIRef("https://creativecommons.org/licenses/by/4.0/")
+
+FIRST_PARTY_MODULES = sorted(ONTOLOGY_DIR.glob("*.ttl"))
 ALL_TTL_FILES = sorted(
     p
     for base in (ONTOLOGY_DIR, ROOT / "shapes", ROOT / "data")
@@ -24,3 +28,24 @@ def test_turtle_parses(ttl_path: Path) -> None:
     graph = Graph()
     graph.parse(ttl_path, format="turtle")
     assert len(graph) > 0, f"{ttl_path} parsed into an empty graph"
+
+
+@pytest.mark.parametrize("module_path", FIRST_PARTY_MODULES, ids=lambda p: p.name)
+def test_first_party_module_metadata(module_path: Path) -> None:
+    """Every first-party module must declare owl:Ontology, versionIRI, CC BY 4.0, and @en/@es titles."""
+    graph = Graph()
+    graph.parse(module_path, format="turtle")
+
+    ontologies = list(graph.subjects(RDF.type, OWL.Ontology))
+    assert len(ontologies) == 1, f"{module_path.name} must declare exactly one owl:Ontology"
+    onto = ontologies[0]
+
+    version_iris = list(graph.objects(onto, OWL.versionIRI))
+    assert len(version_iris) == 1, f"{module_path.name} must declare owl:versionIRI"
+
+    licenses = list(graph.objects(onto, DCTERMS.license))
+    assert CC_BY_4_0 in licenses, f"{module_path.name} must declare CC BY 4.0 license"
+
+    titles = list(graph.objects(onto, DCTERMS.title))
+    langs = {t.language for t in titles if isinstance(t, Literal)}
+    assert {"en", "es"}.issubset(langs), f"{module_path.name} must have dcterms:title in @en and @es"
