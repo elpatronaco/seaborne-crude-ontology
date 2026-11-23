@@ -1,5 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 dcterms:creator a owl:AnnotationProperty .
@@ -11,6 +13,35 @@ dcterms:license a owl:AnnotationProperty .
 dcterms:title a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
+
+sc:FOB a owl:Class ;
+    rdfs:label "FOB" ;
+    skos:altLabel "Free on Board"@en,
+        "Libre a bordo"@es ;
+    skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage"@en, "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro"@es .
+
+sc:CIF a owl:Class ;
+    rdfs:label "CIF" ;
+    skos:altLabel "Cost, Insurance and Freight"@en, "Coste, Seguro y Flete"@es ;
+    skos:definition "Seller pays for cost, freight and a minimum insurance coverage on behalf of buyer. Risk is transferred when goods are on the ship"@en, "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es .
+
+sc:CFR a owl:Class ;
+    rdfs:label "CFR" ;
+    skos:altLabel "Cost and Freight"@en, "Coste y Flete"@es ;
+    skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship"@en, "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo"@es .
+
+sc:DAP a owl:Class ;
+    rdfs:label "DAP" ;
+    skos:altLabel "Delivered at Place"@en, "Entrega en el Lugar"@es ;
+    skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point"@en, "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto"@es ;
+    rdfs:seeAlso <https://www.dhl.com/discover/en-hk/logistics-advice/import-export-advice/dap-delivered-at-place> .
+
+sc:Incoterm a owl:Class ;
+    rdfs:label "Incoterm"@en,
+        "Incoterm"@es ;
+    rdfs:subClassOf sc:Thing ;
+    skos:definition "Rule published by the International Chamber of Commerce (ICC) that defines respective operational and contractual obligations of the buyer and seller in domestic and international contracts for the sale of goods."@en,
+        "Regla publica por la Cámara de Comercio Internacional (CCI) que define las respectivas obligaciones operacionales y contractuales de un comprador y vendedor en un contrato nacional o internacional para la venta de mercancías."@es .
 
 <https://w3id.org/seaborne-crude/incoterms> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
