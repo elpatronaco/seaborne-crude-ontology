@@ -19,6 +19,62 @@ skos:definition a owl:AnnotationProperty .
 
 skos:note a owl:AnnotationProperty .
 
+sc:freightPayer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "freight payer"@en,
+        "pagador del flete"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role that contracts and pays for main sea freight under an Incoterms rule."@en,
+        "Rol contractual que contrata y paga el flete marítimo principal según una regla Incoterms."@es .
+
+sc:hasIncotermEdition a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Incoterm edition"@en,
+        "tiene edición de Incoterms"@es ;
+    rdfs:domain sc:ContractDocument ;
+    rdfs:range sc:IncotermEdition ;
+    skos:definition "Links a contract document to its ICC Incoterms edition."@en,
+        "Vincula un documento contractual con su edición de Incoterms de la CCI."@es .
+
+sc:hasIncotermRule a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Incoterm rule"@en,
+        "tiene regla Incoterm"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:IncotermRule ;
+    skos:definition "Links a physical crude contract to its governing Incoterms rule."@en,
+        "Vincula un contrato físico de crudo con su regla Incoterms aplicable."@es .
+
+sc:mandatoryInsurancePayer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "mandatory insurance payer"@en,
+        "pagador del seguro obligatorio"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role required to arrange and pay for minimum marine cargo insurance under an Incoterms rule."@en,
+        "Rol contractual obligado a contratar y pagar el seguro marítimo mínimo de la carga según una regla Incoterms."@es ;
+    skos:note "Applies to CIF only (ICC Clause C, at least 110% of contract value); FOB, CFR, and DAP require no insurance."@en,
+        "Aplica solo a CIF (Cláusula C de ICC, al menos el 110% del valor del contrato); FOB, CFR y DAP no exigen seguro."@es .
+
+sc:transitRiskBearer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "transit risk bearer"@en,
+        "responsable del riesgo en tránsito"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role that bears cargo loss or damage risk during sea transit under an Incoterms rule."@en,
+        "Rol contractual que asume el riesgo de pérdida o daño de la carga durante el tránsito marítimo según una regla Incoterms."@es .
+
+sc:vesselNominator a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "vessel nominator"@en,
+        "nominador del buque"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role responsible for nominating the vessel under an Incoterms rule."@en,
+        "Rol contractual responsable de nominar el buque según una regla Incoterms."@es .
+
 <https://w3id.org/seaborne-crude/incoterms> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Module formalizing Incoterms rules (FOB, CFR, CIF, DAP) on both 2010 and 2020 editions, separating transit risk transfer from freight, insurance, and vessel nomination obligations."@en,
@@ -37,7 +93,10 @@ sc:CFR a owl:NamedIndividual,
     skos:altLabel "Cost and Freight"@en,
         "Coste y Flete"@es ;
     skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship."@en,
-        "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es .
+        "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:SellerRole .
 
 sc:CIF a owl:NamedIndividual,
         sc:IncotermRule ;
@@ -47,7 +106,11 @@ sc:CIF a owl:NamedIndividual,
     skos:altLabel "Cost, Insurance and Freight"@en,
         "Coste, Seguro y Flete"@es ;
     skos:definition "Seller pays for cost, freight and a minimum insurance coverage on behalf of buyer. Risk is transferred when goods are on the ship."@en,
-        "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es .
+        "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:mandatoryInsurancePayer sc:SellerRole ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:SellerRole .
 
 sc:DAP a owl:NamedIndividual,
         sc:IncotermRule ;
@@ -57,7 +120,10 @@ sc:DAP a owl:NamedIndividual,
     skos:altLabel "Delivered at Place"@en,
         "Entrega en el Lugar"@es ;
     skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point."@en,
-        "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto."@es .
+        "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:transitRiskBearer sc:SellerRole ;
+    sc:vesselNominator sc:SellerRole .
 
 sc:FOB a owl:NamedIndividual,
         sc:IncotermRule ;
@@ -67,36 +133,62 @@ sc:FOB a owl:NamedIndividual,
     skos:altLabel "Free on Board"@en,
         "Libre a bordo"@es ;
     skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage."@en,
-        "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro."@es .
+        "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro."@es ;
+    sc:freightPayer sc:BuyerRole ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:BuyerRole .
 
 sc:Incoterms2010 a owl:NamedIndividual,
         sc:IncotermEdition ;
     rdfs:label "Incoterms 2010"@en,
         "Incoterms 2010"@es ;
-    skos:definition "The 2010 edition of the ICC Incoterms rules (ICC Publication No. 715), effective 1 January 2011."@en,
-        "Edición 2010 de las reglas Incoterms de la CCI (Publicación CCI n.º 715), en vigor desde el 1 de enero de 2011."@es .
+    skos:definition "ICC Incoterms 2010 edition (ICC Publication No. 715)."@en,
+        "Edición Incoterms 2010 de la CCI (Publicación CCI n.º 715)."@es .
 
 sc:Incoterms2020 a owl:NamedIndividual,
         sc:IncotermEdition ;
     rdfs:label "Incoterms 2020"@en,
         "Incoterms 2020"@es ;
-    skos:definition "The 2020 edition of the ICC Incoterms rules (ICC Publication No. 723), effective 1 January 2020."@en,
-        "Edición 2020 de las reglas Incoterms de la CCI (Publicación CCI n.º 723), en vigor desde el 1 de enero de 2020."@es .
+    skos:definition "ICC Incoterms 2020 edition (ICC Publication No. 723)."@en,
+        "Edición Incoterms 2020 de la CCI (Publicación CCI n.º 723)."@es .
 
 sc:IncotermEdition a owl:Class ;
     rdfs:label "Incoterm Edition"@en,
         "Edición de Incoterms"@es ;
-    skos:definition "Published edition of the International Chamber of Commerce (ICC) Incoterms rules governing a contract."@en,
-        "Edición publicada de las reglas Incoterms de la Cámara de Comercio Internacional (CCI) que rige un contrato."@es .
+    skos:definition "Published edition of the ICC Incoterms rules."@en,
+        "Edición publicada de las reglas Incoterms de la CCI."@es .
+
+sc:BuyerRole a owl:NamedIndividual,
+        sc:ContractualRole ;
+    rdfs:label "Buyer Role"@en,
+        "Rol de Comprador"@es ;
+    skos:definition "Contractual role of the buyer."@en,
+        "Rol contractual del comprador."@es .
+
+sc:ContractualRole a owl:Class ;
+    rdfs:label "Contractual Role"@en,
+        "Rol Contractual"@es ;
+    skos:definition "Contractual role (buyer or seller) used to allocate Incoterms risk and obligations."@en,
+        "Rol contractual (comprador o vendedor) usado para asignar riesgos y obligaciones Incoterms."@es .
+
+sc:SellerRole a owl:NamedIndividual,
+        sc:ContractualRole ;
+    rdfs:label "Seller Role"@en,
+        "Rol de Vendedor"@es ;
+    skos:definition "Contractual role of the seller."@en,
+        "Rol contractual del vendedor."@es .
 
 sc:IncotermRule a owl:Class ;
     rdfs:label "Incoterm Rule"@en,
         "Regla Incoterm"@es ;
-    skos:definition "Rule published by the International Chamber of Commerce (ICC) that defines respective operational and contractual obligations of the buyer and seller in domestic and international contracts for the sale of goods."@en,
-        "Regla publicada por la Cámara de Comercio Internacional (CCI) que define las respectivas obligaciones operacionales y contractuales de un comprador y vendedor en un contrato nacional o internacional para la venta de mercancías."@es .
+    skos:definition "ICC trade rule defining buyer and seller obligations in a sale of goods contract."@en,
+        "Regla comercial de la CCI que define las obligaciones de comprador y vendedor en una compraventa de mercancías."@es .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( sc:IncotermRule sc:IncotermEdition sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+    owl:members ( sc:IncotermRule sc:IncotermEdition sc:ContractualRole sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:BuyerRole sc:SellerRole ) .
 
 [] a owl:AllDifferent ;
     owl:distinctMembers ( sc:Incoterms2010 sc:Incoterms2020 ) .
