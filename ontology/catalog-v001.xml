@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="seaborne-crude" name="https://w3id.org/seaborne-crude" uri="seaborne-crude.ttl"/>
+    <uri id="seaborne-crude-v0.1.0" name="https://w3id.org/seaborne-crude/0.1.0" uri="seaborne-crude.ttl"/>
+    <uri id="owl-time" name="http://www.w3.org/2006/time" uri="external/owl-time.ttl"/>
+    <uri id="owl-time-2016" name="http://www.w3.org/2006/time#2016" uri="external/owl-time.ttl"/>
+</catalog>
