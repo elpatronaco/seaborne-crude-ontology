@@ -23,12 +23,12 @@ sc:Vessel a owl:Class ;
     rdfs:subClassOf sc:Thing ;
     skos:definition "Cargo vehicle designed to transport goods across water bodies."@en,
         "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es ;
-    skos:scopeNote "In the scope of the ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
-        "En el alcance de la ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
+    skos:scopeNote "In the scope of this ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
+        "En el alcance de esta ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
 
 sc:isLoaded a owl:DatatypeProperty ;
     rdfs:label "is loaded"@en, "está cargado"@es;
-    skos:definition "Whether the vehicle has cargo loaded in"@en, "Si el buque tiene carga cargada en sus bodegas"@es ;
+    skos:definition "Whether the vehicle has crude oil cargo loaded in"@en, "Si el buque tiene carga de crudo cargada en sus bodegas"@es ;
     rdfs:range xsd:boolean .
     
 sc:AfraClass a owl:Class ;
