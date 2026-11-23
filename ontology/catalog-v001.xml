@@ -4,5 +4,6 @@
     <uri id="core-contract" name="https://w3id.org/seaborne-crude/core-contract" uri="core-contract.ttl"/>
     <uri id="incoterms" name="https://w3id.org/seaborne-crude/incoterms" uri="incoterms.ttl"/>
     <uri id="logistics" name="https://w3id.org/seaborne-crude/logistics" uri="logistics.ttl"/>
+    <uri id="quality" name="https://w3id.org/seaborne-crude/quality" uri="quality.ttl"/>
     <uri id="owl-time" name="http://www.w3.org/2006/time" uri="external/owl-time.ttl"/>
 </catalog>

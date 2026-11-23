@@ -14,8 +14,8 @@ skos:definition a owl:AnnotationProperty .
 
 <https://w3id.org/seaborne-crude/core-contract> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
-    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, and contractual volume with operational tolerance."@en,
-        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes y volumen contractual con tolerancia operativa."@es ;
+    dcterms:description "Module defining physical crude sales contracts (spot and term), deal recaps, general terms and conditions (GT&Cs), contracting parties, contractual volume, operational tolerance, price basis, and payment terms."@en,
+        "Módulo que define contratos físicos de compraventa de crudo (spot y a término), resúmenes de operación (deal recaps), condiciones generales (GT&Cs), partes contratantes y volumen contractual, tolerancia operativa, base de precios y términos de pago."@es ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: Core Contract Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo Central de Contratos"@es ;
