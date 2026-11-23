@@ -15,18 +15,43 @@ dcterms:title a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
+skos:scopeNote a owl:AnnotationProperty .
+
 sc:Vessel a owl:Class ;
     rdfs:label "Vessel"@en,
         "Buque"@es ;
     rdfs:subClassOf sc:Thing ;
     skos:definition "Cargo vehicle designed to transport goods across water bodies."@en,
-        "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es .
+        "Vehículo de cargamento diseñado para transportar bienes a través de cuerpos de agua"@es ;
+    skos:scopeNote "In the scope of the ontology, vessels are assumed to be crude oil (dirty cargo) tankers - Clean product tankers are out of scope."@en,
+        "En el alcance de la ontología, se asume que los buques son petroleros de crudo (flete sucio) - Los buques de productos limpios quedan fuera del alcance."@es .
 
 sc:isLoaded a owl:DatatypeProperty ;
     rdfs:label "is loaded"@en, "está cargado"@es;
     skos:definition "Whether the vehicle has cargo loaded in"@en, "Si el buque tiene carga cargada en sus bodegas"@es ;
     rdfs:range xsd:boolean .
     
+sc:AfraClass a owl:Class ;
+    rdfs:label "Afra Class"@en, "Clase Afra"@es;
+    rdfs:subClassOf sc:Thing ;
+    skos:definition "Size class of the vehicle according to the Afra scale, as defined in [seeAlso]."@en, "Clase de tamaño del vehículo según la escala Afra, según se define en [seeAlso]."@es ;
+    rdfs:seeAlso <https://www.eia.gov/todayinenergy/detail.php?id=17991> .
+
+sc:Aframax a owl:Class ;
+    rdfs:label "Aframax"@en, "Aframax"@es;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:definition "Cargo vessel of medium size designed to transport 80-120 DWT"@en, "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
+
+sc:Suezmax a owl:Class ;
+    rdfs:label "Suezmax"@en, "Suezmax"@es;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en, "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
+
+sc:VLGCC a owl:Class ;
+    rdfs:label "VLGCC"@en, "VLGCC"@es;
+    skos:altLabel "Very Large Crude Carrier" ;
+    rdfs:subClassOf sc:AfraClass ;
+    skos:definition "Cargo vessel of medium-large size designed to transport 120-200 DWT"@en, "Buque de carga de tamaño mediano-grande diseñado para transportar entre 120,000 y 200,000 toneladas de peso muerto"@es .
 
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
