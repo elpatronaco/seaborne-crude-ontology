@@ -17,12 +17,14 @@ skos:definition a owl:AnnotationProperty .
 sc:DealRecap a owl:Class ;
     rdfs:label "Deal Recap"@en,
         "Resumen de Operación"@es ;
+    rdfs:subClassOf sc:ContractDocument ;
     skos:definition "Summary of the key commercial terms of a physical crude oil trade, typically used for communication between buyer and seller before a formal contract is issued."@en,
         "Resumen de los términos comerciales clave de una operación de compraventa de crudo físico, utilizado normalmente para la comunicación entre comprador y vendedor antes de la emisión de un contrato formal."@es .
 
 sc:GTC a owl:Class ;
     rdfs:label "General Terms and Conditions"@en,
         "Términos y Condiciones Generales"@es ;
+    rdfs:subClassOf sc:ContractDocument ;
     skos:altLabel "GT&Cs"@en,
         "T&Cs"@en ;
     skos:definition "Standard, pre-drafted clauses that set the baseline rules for commercial transactions between businesses, not specific to any single deal"@en,
@@ -52,6 +54,12 @@ sc:TermContract a owl:Class ;
     rdfs:subClassOf sc:PhysicalCrudeContract ;
     skos:definition "Ongoing physical crude oil sales contract covering multiple scheduled cargoes over an agreed period."@en,
         "Contrato físico continuo de compraventa de crudo que cubre múltiples cargamentos programados durante un período acordado."@es .
+
+sc:ContractDocument a owl:Class ;
+    rdfs:label "Contract Document"@en,
+        "Documento Contractual"@es ;
+    skos:definition "Document that contains contractual terms agreed by the parties involved in a transaction."@en,
+        "Documento que contiene los términos contractuales acordados por las partes implicadas en una transacción."@es .
 
 sc:PhysicalCrudeContract a owl:Class ;
     rdfs:label "Physical Crude Contract"@en,
