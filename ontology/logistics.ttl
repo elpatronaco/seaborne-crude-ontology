@@ -20,6 +20,23 @@ skos:definition a owl:AnnotationProperty .
 
 skos:scopeNote a owl:AnnotationProperty .
 
+sc:hasCargo a owl:ObjectProperty ;
+    rdfs:label "has cargo"@en,
+        "tiene carga"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:Cargo ;
+    skos:definition "Reference to the cargo loaded on the vessel"@en,
+        "Referencia a la carga cargada en el buque"@es .
+
+sc:hasLoadedQuantity a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has loaded quantity"@en,
+        "tiene cantidad cargada"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range sc:CargoQuantity ;
+    skos:definition "Reference to the quantity of cargo loaded on the vessel"@en,
+        "Referencia a la cantidad de cargamento cargado en el buque"@es .
+
 sc:isLoaded a owl:DatatypeProperty ;
     rdfs:label "is loaded"@en,
         "está cargado"@es ;
@@ -78,6 +95,12 @@ sc:VLCC a owl:Class ;
     skos:altLabel "Very Large Crude Carrier"@en ;
     skos:definition "Very large crude carrier designed to transport 200,000 DWT or more"@en,
         "Buque petrolero de gran tamaño diseñado para transportar 200,000 toneladas de peso muerto o más"@es .
+
+sc:Cargo a owl:Class ;
+    rdfs:label "Cargo"@en,
+        "Carga"@es ;
+    skos:definition "Lading or freight of a vehicle that transports goods"@en,
+        "Carga o flete de un vehículo que transporta bienes"@es .
 
 sc:deadweightTonnage a owl:DatatypeProperty,
         owl:FunctionalProperty ;
