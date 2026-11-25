@@ -20,6 +20,12 @@ skos:definition a owl:AnnotationProperty .
 
 skos:scopeNote a owl:AnnotationProperty .
 
+sc:Port a owl:Class ;
+    rdfs:label "Port"@en,
+        "Puerto"@es ;
+    skos:definition "Place for boat docking, traffic, and storage of cargo."@en,
+        "Lugar para el atraque, tráfico y almacenaje de barcos y sus mercancías."@es .
+
 sc:hasCargo a owl:ObjectProperty ;
     rdfs:label "has cargo"@en,
         "tiene carga"@es ;
