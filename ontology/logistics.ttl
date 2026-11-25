@@ -20,11 +20,14 @@ skos:definition a owl:AnnotationProperty .
 
 skos:scopeNote a owl:AnnotationProperty .
 
-sc:Port a owl:Class ;
-    rdfs:label "Port"@en,
-        "Puerto"@es ;
-    skos:definition "Place for boat docking, traffic, and storage of cargo."@en,
-        "Lugar para el atraque, tráfico y almacenaje de barcos y sus mercancías."@es .
+sc:carriedByVessel a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "carried by vessel"@en,
+        "transportado por buque"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range sc:Vessel ;
+    skos:definition "Links a crude oil cargo to the vessel carrying it."@en,
+        "Vincula un cargamento de crudo con el buque que lo transporta."@es .
 
 sc:hasCargo a owl:ObjectProperty ;
     rdfs:label "has cargo"@en,
@@ -34,6 +37,16 @@ sc:hasCargo a owl:ObjectProperty ;
     skos:definition "Reference to the cargo loaded on the vessel"@en,
         "Referencia a la carga cargada en el buque"@es .
 
+sc:hasLoadPort a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has load port"@en,
+        "tiene puerto de carga"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range sc:Port ;
+    owl:propertyDisjointWith sc:hasDischargePort ;
+    skos:definition "Links a crude oil cargo to the port where it is loaded."@en,
+        "Vincula un cargamento de crudo con el puerto donde se carga."@es .
+
 sc:hasLoadedQuantity a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "has loaded quantity"@en,
@@ -42,14 +55,6 @@ sc:hasLoadedQuantity a owl:FunctionalProperty,
     rdfs:range sc:CargoQuantity ;
     skos:definition "Reference to the quantity of cargo loaded on the vessel"@en,
         "Referencia a la cantidad de cargamento cargado en el buque"@es .
-
-sc:isLoaded a owl:DatatypeProperty ;
-    rdfs:label "is loaded"@en,
-        "está cargado"@es ;
-    rdfs:domain sc:Vessel ;
-    rdfs:range xsd:boolean ;
-    skos:definition "Whether the vehicle has crude oil cargo loaded in"@en,
-        "Si el buque tiene carga de crudo cargada en sus bodegas"@es .
 
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -102,11 +107,20 @@ sc:VLCC a owl:Class ;
     skos:definition "Very large crude carrier designed to transport 200,000 DWT or more"@en,
         "Buque petrolero de gran tamaño diseñado para transportar 200,000 toneladas de peso muerto o más"@es .
 
-sc:Cargo a owl:Class ;
-    rdfs:label "Cargo"@en,
-        "Carga"@es ;
-    skos:definition "Lading or freight of a vehicle that transports goods"@en,
-        "Carga o flete de un vehículo que transporta bienes"@es .
+sc:hasDischargePort a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has discharge port"@en,
+        "tiene puerto de descarga"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range sc:Port ;
+    skos:definition "Links a crude oil cargo to the port where it is discharged."@en,
+        "Vincula un cargamento de crudo con el puerto donde se descarga."@es .
+
+sc:Port a owl:Class ;
+    rdfs:label "Port"@en,
+        "Puerto"@es ;
+    skos:definition "Place for boat docking, traffic, and storage of cargo."@en,
+        "Lugar para el atraque, tráfico y almacenaje de barcos y sus mercancías."@es .
 
 sc:deadweightTonnage a owl:DatatypeProperty,
         owl:FunctionalProperty ;
@@ -116,6 +130,12 @@ sc:deadweightTonnage a owl:DatatypeProperty,
     rdfs:range xsd:decimal ;
     skos:definition "Maximum weight in metric tonnes that a vessel can safely carry, including cargo, fuel, and crew."@en,
         "Peso máximo en toneladas métricas que un buque puede transportar de forma segura, incluyendo carga, combustible y tripulación."@es .
+
+sc:Cargo a owl:Class ;
+    rdfs:label "Cargo"@en,
+        "Carga"@es ;
+    skos:definition "Lading or freight of a vehicle that transports goods"@en,
+        "Carga o flete de un vehículo que transporta bienes"@es .
 
 sc:Vessel a owl:Class ;
     rdfs:label "Vessel"@en,
@@ -129,5 +149,5 @@ sc:Vessel a owl:Class ;
     owl:members ( sc:Aframax sc:Suezmax sc:VLCC ) .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( sc:Vessel sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+    owl:members ( sc:Vessel sc:Cargo sc:Port sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
 
