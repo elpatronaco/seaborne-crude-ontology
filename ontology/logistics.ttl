@@ -30,6 +30,24 @@ sc:carriedByVessel a owl:FunctionalProperty,
     skos:definition "Links a crude oil cargo to the vessel carrying it."@en,
         "Vincula un cargamento de crudo con el buque que lo transporta."@es .
 
+sc:eventDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "event date"@en,
+        "fecha del evento"@es ;
+    rdfs:domain sc:LogisticsEvent ;
+    rdfs:range xsd:date ;
+    skos:definition "Calendar date on which a logistics event took place."@en,
+        "Fecha de calendario en la que tuvo lugar un evento logístico."@es .
+
+sc:forCargo a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "for cargo"@en,
+        "para el cargamento"@es ;
+    rdfs:domain sc:LogisticsEvent ;
+    rdfs:range sc:Cargo ;
+    skos:definition "Links an operational logistics event to the crude oil cargo it concerns."@en,
+        "Vincula un evento logístico operativo con el cargamento de crudo al que corresponde."@es .
+
 sc:hasCargo a owl:ObjectProperty ;
     rdfs:label "has cargo"@en,
         "tiene carga"@es ;
@@ -84,6 +102,15 @@ sc:laycanStartDate a owl:DatatypeProperty,
     skos:definition "First calendar date (first layday) of a laycan window."@en,
         "Primera fecha de calendario de una ventana laycan."@es .
 
+sc:nominatesVessel a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "nominates vessel"@en,
+        "nomina buque"@es ;
+    rdfs:domain sc:VesselNomination ;
+    rdfs:range sc:Vessel ;
+    skos:definition "Links a vessel nomination event to the vessel nominated for the cargo."@en,
+        "Vincula un evento de nominación de buque con el buque nominado para el cargamento."@es .
+
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Module covering cargoes, tankers by AFRA size class (Aframax, Suezmax, VLCC), load/discharge ports, vessel nomination, Notice of Readiness (NOR), loading events, and laycan intervals using OWL-Time vocabulary."@en,
@@ -107,6 +134,21 @@ sc:Aframax a owl:Class ;
                                 owl:withRestrictions ( [ xsd:minInclusive 80000.0 ] [ xsd:maxExclusive 120000.0 ] ) ] ] ) ] ;
     skos:definition "Cargo vessel of medium size designed to transport 80,000-120,000 DWT"@en,
         "Buque de carga de tamaño mediano diseñado para transportar entre 80,000 y 120,000 toneladas de peso muerto"@es .
+
+sc:LoadingEvent a owl:Class ;
+    rdfs:label "Loading Event"@en,
+        "Evento de Carga"@es ;
+    rdfs:subClassOf sc:LogisticsEvent ;
+    skos:definition "Operational event recording the physical loading of a crude oil cargo onto a vessel at the load port."@en,
+        "Evento operativo que registra la carga física de un cargamento de crudo en un buque en el puerto de carga."@es .
+
+sc:NoticeOfReadiness a owl:Class ;
+    rdfs:label "Notice of Readiness"@en,
+        "Aviso de disponibilidad"@es ;
+    rdfs:subClassOf sc:LogisticsEvent ;
+    skos:altLabel "NOR"@en ;
+    skos:definition "Formal notification tendered by the vessel upon arrival at port stating readiness to load or discharge cargo."@en,
+        "Notificación formal emitida por el buque a su llegada a puerto declarando estar listo para cargar o descargar el cargamento."@es .
 
 sc:Suezmax a owl:Class ;
     rdfs:label "Suezmax"@en,
@@ -144,6 +186,13 @@ sc:hasDischargePort a owl:FunctionalProperty,
     skos:definition "Links a crude oil cargo to the port where it is discharged."@en,
         "Vincula un cargamento de crudo con el puerto donde se descarga."@es .
 
+sc:VesselNomination a owl:Class ;
+    rdfs:label "Vessel Nomination"@en,
+        "Nominación de Buque"@es ;
+    rdfs:subClassOf sc:LogisticsEvent ;
+    skos:definition "Operational notification designating a specific vessel to lift or deliver a crude oil cargo under a contract."@en,
+        "Notificación operativa que designa un buque específico para embarcar o entregar un cargamento de crudo bajo un contrato."@es .
+
 sc:Port a owl:Class ;
     rdfs:label "Port"@en,
         "Puerto"@es ;
@@ -167,6 +216,12 @@ sc:Laycan a owl:Class ;
     skos:definition "Agreed time window (laydays to cancelling date) during which the vessel must arrive and tender Notice of Readiness."@en,
         "Ventana temporal acordada (laydays hasta fecha de cancelación) durante la cual el buque debe llegar y presentar el Notice of Readiness."@es .
 
+sc:LogisticsEvent a owl:Class ;
+    rdfs:label "Logistics Event"@en,
+        "Evento logístico"@es ;
+    skos:definition "Operational shipping milestone occurring in the execution of a seaborne crude oil cargo."@en,
+        "Hito operativo marítimo que ocurre durante la ejecución de un cargamento de crudo por vía marítima."@es .
+
 sc:Cargo a owl:Class ;
     rdfs:label "Cargo"@en,
         "Carga"@es ;
@@ -185,5 +240,8 @@ sc:Vessel a owl:Class ;
     owl:members ( sc:Aframax sc:Suezmax sc:VLCC ) .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( sc:Vessel sc:Cargo sc:Port sc:Laycan sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+    owl:members ( sc:VesselNomination sc:NoticeOfReadiness sc:LoadingEvent ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:Vessel sc:Cargo sc:Port sc:Laycan sc:LogisticsEvent sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
 
