@@ -4,6 +4,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcterms:creator a owl:AnnotationProperty .
@@ -37,6 +38,15 @@ sc:hasCargo a owl:ObjectProperty ;
     skos:definition "Reference to the cargo loaded on the vessel"@en,
         "Referencia a la carga cargada en el buque"@es .
 
+sc:hasLaycan a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has laycan"@en,
+        "tiene laycan"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range sc:Laycan ;
+    skos:definition "Links a crude oil cargo to its agreed laycan window."@en,
+        "Vincula un cargamento de crudo con su ventana temporal de laycan acordada."@es .
+
 sc:hasLoadPort a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "has load port"@en,
@@ -55,6 +65,24 @@ sc:hasLoadedQuantity a owl:FunctionalProperty,
     rdfs:range sc:CargoQuantity ;
     skos:definition "Reference to the quantity of cargo loaded on the vessel"@en,
         "Referencia a la cantidad de cargamento cargado en el buque"@es .
+
+sc:laycanEndDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "laycan end date"@en,
+        "fecha de fin del laycan"@es ;
+    rdfs:domain sc:Laycan ;
+    rdfs:range xsd:date ;
+    skos:definition "Last calendar date (cancelling date) of a laycan window."@en,
+        "Última fecha de calendario (fecha de cancelación) de una ventana laycan."@es .
+
+sc:laycanStartDate a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "laycan start date"@en,
+        "fecha de inicio del laycan"@es ;
+    rdfs:domain sc:Laycan ;
+    rdfs:range xsd:date ;
+    skos:definition "First calendar date (first layday) of a laycan window."@en,
+        "Primera fecha de calendario de una ventana laycan."@es .
 
 <https://w3id.org/seaborne-crude/logistics> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -131,6 +159,14 @@ sc:deadweightTonnage a owl:DatatypeProperty,
     skos:definition "Maximum weight in metric tonnes that a vessel can safely carry, including cargo, fuel, and crew."@en,
         "Peso máximo en toneladas métricas que un buque puede transportar de forma segura, incluyendo carga, combustible y tripulación."@es .
 
+sc:Laycan a owl:Class ;
+    rdfs:label "Laycan"@en,
+        "Laycan"@es ;
+    rdfs:subClassOf time:ProperInterval ;
+    skos:altLabel "Laydays and Cancelling"@en ;
+    skos:definition "Agreed time window (laydays to cancelling date) during which the vessel must arrive and tender Notice of Readiness."@en,
+        "Ventana temporal acordada (laydays hasta fecha de cancelación) durante la cual el buque debe llegar y presentar el Notice of Readiness."@es .
+
 sc:Cargo a owl:Class ;
     rdfs:label "Cargo"@en,
         "Carga"@es ;
@@ -149,5 +185,5 @@ sc:Vessel a owl:Class ;
     owl:members ( sc:Aframax sc:Suezmax sc:VLCC ) .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( sc:Vessel sc:Cargo sc:Port sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+    owl:members ( sc:Vessel sc:Cargo sc:Port sc:Laycan sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
 
