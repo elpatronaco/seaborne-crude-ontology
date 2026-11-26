@@ -1,6 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 dcterms:creator a owl:AnnotationProperty .
 
@@ -12,7 +15,39 @@ dcterms:title a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
-<https://w3id.org/seaborne-crude/quality> a owl:Ontology ;
+sc:GuaranteedSpecification a owl:Class ;
+    rdfs:label "Guaranteed Specification"@en,
+        "Especificación Garantizada"@es ;
+    rdfs:subClassOf sc:QualitySpecification ;
+    owl:disjointWith sc:TypicalSpecification .
+
+sc:hasQualitySpecification a owl:ObjectProperty ;
+    rdfs:label "has quality specification"@en,
+        "tiene especificación de calidad"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:QualitySpecification .
+
+sc:maxAPIGravity a owl:DatatypeProperty ;
+    rdfs:label "Maximum API Gravity"@en,
+        "Gravedad API máxima"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal .
+
+sc:maxSulfurContent a owl:DatatypeProperty ;
+    rdfs:label "Maximum Sulfur Content"@en,
+        "Contenido máximo de azufre"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal .
+
+sc:minAPIGravity a owl:DatatypeProperty ;
+    rdfs:label "Minimum API Gravity"@en,
+        "min API gravity"@en,
+        "Gravedad API mínima"@es,
+        "gravedad API mínima"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal .
+
+sc:quality a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Module formalizing crude quality terms: guaranteed and typical specifications, and measured API gravity and sulfur content."@en,
         "Módulo que formaliza los términos de calidad del crudo: especificaciones garantizadas y típicas, y valores medidos de gravedad API y contenido de azufre."@es ;
@@ -21,4 +56,25 @@ skos:definition a owl:AnnotationProperty .
         "Ontología de Comercio Marítimo de Crudo: Módulo de Calidad del Crudo"@es ;
     owl:versionIRI <https://w3id.org/seaborne-crude/quality/0.1.0> ;
     owl:versionInfo "0.1.0" .
+
+sc:typicalAPIGravity a owl:DatatypeProperty ;
+    rdfs:label "Typical API Gravity"@en,
+        "Gravedad API típica"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal .
+
+sc:typicalSulfurContent a owl:DatatypeProperty ;
+    rdfs:label "Typical Sulfur Content"@en,
+        "Contenido de azufre típico"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal .
+
+sc:TypicalSpecification a owl:Class ;
+    rdfs:label "Typical Specification"@en,
+        "Especificación Típica"@es ;
+    rdfs:subClassOf sc:QualitySpecification .
+
+sc:QualitySpecification a owl:Class ;
+    rdfs:label "Quality Specification"@en,
+        "Especificación de Calidad"@es .
 
