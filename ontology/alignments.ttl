@@ -1,3 +1,5 @@
+@prefix cmns-doc: <https://www.omg.org/spec/Commons/Documents/> .
+@prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix fibo-der-cm-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/CommoditiesContracts/> .
 @prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
@@ -34,6 +36,10 @@ sc:GuaranteedSpecification rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitmen
 sc:IncotermRule rdfs:subClassOf fibo-fbc-fi-fi:StandardizedTerms .
 
 sc:MetricTonne skos:exactMatch unit:TON_Metric .
+
+sc:NoticeOfReadiness skos:closeMatch cmns-doc:Notice .
+
+sc:Party rdfs:subClassOf cmns-pts:Party .
 
 sc:PhysicalCrudeContract rdfs:subClassOf fibo-fnd-agr-ctr:BilateralContract,
         fibo-fnd-agr-ctr:WrittenContract .
@@ -106,4 +112,12 @@ fibo-fnd-agr-ctr:NonBindingTerm a owl:Class ;
 fibo-fnd-agr-ctr:WrittenContract a owl:Class ;
     rdfs:label "Written Contract (FIBO)"@en ;
     rdfs:comment "Verified FIBO FND class for formal contracts written and signed by the parties."@en .
+
+cmns-doc:Notice a owl:Class ;
+    rdfs:label "Notice (OMG Commons)"@en ;
+    rdfs:comment "Verified OMG Commons Documents class for formal announcements or intimations; aligned via skos:closeMatch to avoid mixing events and documents."@en .
+
+cmns-pts:Party a owl:Class ;
+    rdfs:label "Party (OMG Commons)"@en ;
+    rdfs:comment "Verified OMG Commons class used by FIBO FND Parties for an entity participating in an agreement."@en .
 
