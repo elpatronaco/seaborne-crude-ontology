@@ -1,6 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix omg-documents: <https://www.omg.org/spec/Commons/Documents/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 dcterms:creator a owl:AnnotationProperty .
@@ -23,8 +26,9 @@ skos:definition a owl:AnnotationProperty .
 
 skos:exactMatch a owl:AnnotationProperty .
 
-<https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/Contract> a owl:Class ;
-    rdfs:comment "IRI alignment. TODO(verify): confirm exact FIBO Contract IRI."@en .
+sc:ContractDocument rdfs:subClassOf fibo-fnd-agr-ctr:ContractDocument .
+
+sc:NoticeOfReadiness rdfs:subClassOf omg-documents:Notice .
 
 <https://w3id.org/seaborne-crude/alignments> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
