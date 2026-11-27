@@ -5,6 +5,7 @@
 @prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
 @prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pmd-log: <https://w3id.org/pmd/log/> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://w3id.org/seaborne-crude#> .
@@ -27,6 +28,9 @@ skos:exactMatch a owl:AnnotationProperty .
 
 sc:Barrel skos:exactMatch unit:BBL .
 
+sc:Cargo skos:closeMatch pmd-log:LOG_1000025,
+        pmd-log:LOG_1000051 .
+
 sc:CargoQuantity rdfs:subClassOf qudt:QuantityValue .
 
 sc:ContractDocument rdfs:subClassOf fibo-fnd-agr-ctr:ContractDocument .
@@ -34,6 +38,8 @@ sc:ContractDocument rdfs:subClassOf fibo-fnd-agr-ctr:ContractDocument .
 sc:GuaranteedSpecification rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment .
 
 sc:IncotermRule rdfs:subClassOf fibo-fbc-fi-fi:StandardizedTerms .
+
+sc:LogisticsEvent skos:closeMatch pmd-log:LOG_1000120 .
 
 sc:MetricTonne skos:exactMatch unit:TON_Metric .
 
@@ -44,6 +50,8 @@ sc:Party rdfs:subClassOf cmns-pts:Party .
 sc:PhysicalCrudeContract rdfs:subClassOf fibo-fnd-agr-ctr:BilateralContract,
         fibo-fnd-agr-ctr:WrittenContract .
 
+sc:Port skos:closeMatch pmd-log:LOG_1000090 .
+
 sc:QualitySpecification rdfs:subClassOf fibo-fnd-agr-ctr:ContractualElement .
 
 sc:QuantityUnit rdfs:subClassOf qudt:Unit .
@@ -52,6 +60,8 @@ sc:SpotContract skos:closeMatch fibo-der-cm-ctr:CommoditySpotContract .
 
 sc:TypicalSpecification rdfs:subClassOf fibo-fnd-agr-ctr:NonBindingTerm .
 
+sc:Vessel skos:closeMatch pmd-log:LOG_1000041 .
+
 <https://w3id.org/seaborne-crude/alignments> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Bridge module aligning the seaborne-crude domain ontology with external vocabularies (QUDT, FIBO, PMDCo Logistics, and deferred GLEIF)."@en,
@@ -59,9 +69,7 @@ sc:TypicalSpecification rdfs:subClassOf fibo-fnd-agr-ctr:NonBindingTerm .
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:title "Seaborne-Traded Crude Oil Ontology: External Alignments Module"@en,
         "Ontología de Comercio Marítimo de Crudo: Módulo de Alineamientos Externos"@es ;
-    rdfs:comment "GLEIF: deferred to PEC4 (out of scope for Iteration 1). Align entities.ttl with GLEIF L1/L2 in PEC4."@en,
-        "PMDCo Logistics: IRI alignment (locked). TODO(verify) — add verified PMDCo Logistics class/property IRIs once selected."@en,
-        "QUDT, FIBO, and PMDCo Logistics use lightweight soft IRI alignment stubs without owl:imports."@en ;
+    rdfs:comment "Lightweight soft IRI alignments without owl:imports. GLEIF L1/L2 alignment is deferred to Iteration 2 (PEC4) in entities.ttl."@en ;
     owl:versionIRI <https://w3id.org/seaborne-crude/alignments/0.1.0> ;
     owl:versionInfo "0.1.0" .
 
@@ -112,6 +120,26 @@ fibo-fnd-agr-ctr:NonBindingTerm a owl:Class ;
 fibo-fnd-agr-ctr:WrittenContract a owl:Class ;
     rdfs:label "Written Contract (FIBO)"@en ;
     rdfs:comment "Verified FIBO FND class for formal contracts written and signed by the parties."@en .
+
+pmd-log:LOG_1000025 a owl:Class ;
+    rdfs:label "cargo (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a material entity transported using transport equipment by a carrier; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000041 a owl:Class ;
+    rdfs:label "piece of transport equipment (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for equipment holding and transporting material entities; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000051 a owl:Class ;
+    rdfs:label "shipment (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a collection of material entities delivered together; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000090 a owl:Class ;
+    rdfs:label "supply chain node (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a geospatial site of a supply chain process; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000120 a owl:Class ;
+    rdfs:label "logistics process (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a business process involving transport, preparation, storage, or receiving; aligned via skos:closeMatch to avoid BFO coupling."@en .
 
 cmns-doc:Notice a owl:Class ;
     rdfs:label "Notice (OMG Commons)"@en ;
