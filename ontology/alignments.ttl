@@ -1,11 +1,10 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix fibo-fbc-fnce-inst: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
-@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
-@prefix omg-documents: <https://www.omg.org/spec/Commons/Documents/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sc: <https://w3id.org/seaborne-crude#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
 
 dcterms:creator a owl:AnnotationProperty .
 
@@ -15,23 +14,22 @@ dcterms:license a owl:AnnotationProperty .
 
 dcterms:title a owl:AnnotationProperty .
 
-<http://qudt.org/schema/qudt/QuantityValue> a owl:Class ;
-    rdfs:comment "IRI alignment. TODO(verify): confirm QUDT class IRI."@en .
-
-<http://qudt.org/schema/qudt/Unit> a owl:Class ;
-    rdfs:comment "IRI alignment. TODO(verify): confirm QUDT class IRI."@en .
-
 skos:closeMatch a owl:AnnotationProperty .
 
 skos:definition a owl:AnnotationProperty .
 
 skos:exactMatch a owl:AnnotationProperty .
 
-sc:ContractDocument rdfs:subClassOf fibo-fnd-agr-ctr:ContractDocument .
+<https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/Contract> a owl:Class ;
+    rdfs:comment "IRI alignment. TODO(verify): confirm exact FIBO Contract IRI."@en .
 
-sc:IncotermRule rdfs:subClassOf fibo-fbc-fnce-inst:StandardizedTerms .
+sc:Barrel skos:exactMatch unit:BBL .
 
-sc:NoticeOfReadiness rdfs:subClassOf omg-documents:Notice .
+sc:CargoQuantity rdfs:subClassOf qudt:QuantityValue .
+
+sc:MetricTonne skos:exactMatch unit:TON_Metric .
+
+sc:QuantityUnit rdfs:subClassOf qudt:Unit .
 
 <https://w3id.org/seaborne-crude/alignments> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
@@ -45,4 +43,20 @@ sc:NoticeOfReadiness rdfs:subClassOf omg-documents:Notice .
         "QUDT, FIBO, and PMDCo Logistics use lightweight soft IRI alignment stubs without owl:imports."@en ;
     owl:versionIRI <https://w3id.org/seaborne-crude/alignments/0.1.0> ;
     owl:versionInfo "0.1.0" .
+
+qudt:QuantityValue a owl:Class ;
+    rdfs:label "Quantity Value (QUDT)"@en ;
+    rdfs:comment "Verified QUDT class for numeric quantity-unit pairs."@en .
+
+qudt:Unit a owl:Class ;
+    rdfs:label "Unit (QUDT)"@en ;
+    rdfs:comment "Verified QUDT base class for measurement units."@en .
+
+unit:BBL a owl:NamedIndividual ;
+    rdfs:label "Barrel (QUDT)"@en ;
+    rdfs:comment "Verified QUDT unit IRI for oil/volume barrel."@en .
+
+unit:TON_Metric a owl:NamedIndividual ;
+    rdfs:label "Metric Ton (QUDT)"@en ;
+    rdfs:comment "Verified QUDT unit IRI for metric tonne (1,000 kg; qudt:exactMatch unit:TONNE in QUDT)."@en .
 
