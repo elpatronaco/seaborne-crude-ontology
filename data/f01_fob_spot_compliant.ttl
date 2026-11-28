@@ -13,6 +13,7 @@ ex:f01-fob-spot-contract a sc:SpotContract ;
     sc:hasCargo ex:f01-sweet-crude-cargo ;
     sc:hasContractedQuantity ex:f01-contracted-qty ;
     sc:hasIncotermRule sc:FOB ;
+    sc:hasQualitySpecification ex:f01-guar-spec ;
     sc:hasSeller ex:f01-seller ;
     sc:incorporatesGTC ex:f01-gtc ;
     sc:operationalTolerancePercent 5.0 .
@@ -52,6 +53,12 @@ ex:f01-gtc a sc:GTC ;
     rdfs:label "F01 Standard GTC"@en ;
     sc:hasIncotermEdition sc:Incoterms2020 ;
     sc:nominationNoticeDays 8 .
+
+ex:f01-guar-spec a sc:GuaranteedSpecification ;
+    rdfs:label "F01 Guaranteed Specification"@en ;
+    sc:maxAPIGravity 42.0 ;
+    sc:maxSulfurContent 0.50 ;
+    sc:minAPIGravity 35.0 .
 
 ex:f01-loaded-qty a sc:CargoQuantity ;
     rdfs:label "F01 Loaded Quantity"@en ;
