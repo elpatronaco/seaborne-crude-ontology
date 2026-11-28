@@ -1,70 +1,80 @@
-@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
-@prefix as: <https://www.w3.org/ns/activitystreams#>.
-@prefix ex: <https://w3id.org/seaborne-crude/examples#>.
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix sc: <https://w3id.org/seaborne-crude#>.
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ex: <https://w3id.org/seaborne-crude/examples#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:f01-fob-afra-vessel a sc:Vessel;
-  rdfs:label "F01 Clean Freight Vessel"@en;
-  sc:deadweightTonnage 80000.0.
+ex:f01-fob-spot-contract a sc:SpotContract ;
+    rdfs:label "F01 FOB Spot Contract"@en ;
+    sc:backedByRecap ex:f01-sweet-crude-recap ;
+    sc:contractDate "2026-05-25"^^xsd:date ;
+    sc:contractId "SC-2026-F01" ;
+    sc:hasBuyer ex:f01-buyer ;
+    sc:hasCargo ex:f01-sweet-crude-cargo ;
+    sc:hasContractedQuantity ex:f01-contracted-qty ;
+    sc:hasIncotermRule sc:FOB ;
+    sc:hasSeller ex:f01-seller ;
+    sc:incorporatesGTC ex:f01-gtc ;
+    sc:operationalTolerancePercent 5.0 .
 
-ex:f01-fob-spot-contract a sc:SpotContract;
-  rdfs:label "F01 FOB Spot Contract"@en;
-  sc:hasBuyer ex:f01-buyer;
-  sc:hasIncotermEdition sc:Incoterms2020;
-  sc:hasIncotermRule sc:FOB;
-  sc:hasSeller ex:f01-seller.
+ex:f01-fob-vessel-nor a sc:NoticeOfReadiness ;
+    rdfs:label "F01 Clean Freight Vessel NOR"@en ;
+    sc:eventDate "2026-06-12"^^xsd:date ;
+    sc:forCargo ex:f01-sweet-crude-cargo .
 
-ex:f01-fob-vessel-nor a sc:NoticeOfReadiness;
-  rdfs:label "F01 Clean Freight Vessel NOR"@en;
-  sc:eventDate "2026-06-12"^^xsd:date;
-  sc:forCargo ex:f01-sweet-crude-cargo.
-
-ex:f01-buyer a sc:Party;
-  rdfs:label "Buyer F01"@en;
-  rdfs:comment "Buyer in the compliant FOB spot case."@en.
-
-ex:f01-sweet-crude a sc:CrudeOil;
-  rdfs:label "Sweet Crude" ;
-  sc:apiGravity 40.0 ;
-  sc:sulfurContent 0.2 .
-
-ex:f01-sweet-crude-recap a sc:DealRecap ;
-    rdfs:label "F01 Sweet Crude Recap" ;
-
-ex:f01-sweet-crude-quantity a sc:CargoQuantity ;
-  rdfs:label "F01 Cargo Quantity" ;
-  sc:hasQuantityUnit sc:MetricTonne ;
-  sc:hasLoadedQuantity 74945.0 ;
-  sc:hasContractedQuantity 75000.0 ;
-sc:hasDischargedQuantity 74500.0 ;
-sc:
-
-ex:f01-sweet-crude-cargo a sc:Cargo;
-  rdfs:label "F01 Sweet Crude"@en;
-  sc:cargoQuantity ex:f01-sweet-crude-quantity ;
-  sc:carriedByVessel ex:f01-fob-afra-vessel ;
-  sc:hasLoadPort ex:f01-rott-port ;
-  sc:hasDischargePort ex:f01-beanr-port . 
-
-ex:f01-seller a sc:Party;
-  rdfs:label "Seller F01"@en;
-  rdfs:comment "Seller in the compliant FOB spot case."@en.
-
-ex:f01-laycan a sc:Laycan;
-  sc:laycanStartDate "2026-06-11"^^xsd:date;
-  sc:laycanEndDate "2026-06-14"^^xsd:date.
-
-ex:f01-rott-port a sc:Port ;
-    rdfs:label "Rotterdam" ;
-    skos:altLabel "ROTT" .
-
-ex:f01-beanr-port a sc:Port ;
-    rdfs:label "Antwerp" ;
-    skos:altLabel "BEANR" .
+ex:f01-laycan a sc:Laycan ;
+    sc:laycanEndDate "2026-06-14"^^xsd:date ;
+    sc:laycanStartDate "2026-06-11"^^xsd:date .
 
 ex:f01-loading-event a sc:LoadingEvent ;
-rdfs:label "F01 Sweet Crude Load" ;
-sc:eventDate "2026-06-15"^^xsd:date ;
-sc:hasPort ex:f01-port ;
+    rdfs:label "F01 Sweet Crude Load"@en ;
+    sc:eventDate "2026-06-15"^^xsd:date ;
+    sc:forCargo ex:f01-sweet-crude-cargo .
+
+ex:f01-beanr-port a sc:Port ;
+    rdfs:label "Antwerp"@en ;
+    skos:altLabel "BEANR" .
+
+ex:f01-buyer a sc:Party ;
+    rdfs:label "Buyer F01"@en ;
+    rdfs:comment "Buyer in the compliant FOB spot case."@en .
+
+ex:f01-contracted-qty a sc:CargoQuantity ;
+    rdfs:label "F01 Contracted Quantity"@en ;
+    sc:hasQuantityUnit sc:MetricTonne ;
+    sc:quantityValue 75000.0 .
+
+ex:f01-fob-afra-vessel a sc:Vessel ;
+    rdfs:label "F01 Clean Freight Vessel"@en ;
+    sc:deadweightTonnage 80000.0 .
+
+ex:f01-gtc a sc:GTC ;
+    rdfs:label "F01 Standard GTC"@en ;
+    sc:hasIncotermEdition sc:Incoterms2020 ;
+    sc:nominationNoticeDays 8 .
+
+ex:f01-loaded-qty a sc:CargoQuantity ;
+    rdfs:label "F01 Loaded Quantity"@en ;
+    sc:hasQuantityUnit sc:MetricTonne ;
+    sc:quantityValue 74945.0 .
+
+ex:f01-rott-port a sc:Port ;
+    rdfs:label "Rotterdam"@en ;
+    skos:altLabel "ROTT" .
+
+ex:f01-seller a sc:Party ;
+    rdfs:label "Seller F01"@en ;
+    rdfs:comment "Seller in the compliant FOB spot case."@en .
+
+ex:f01-sweet-crude-recap a sc:DealRecap ;
+    rdfs:label "F01 Sweet Crude Recap"@en .
+
+ex:f01-sweet-crude-cargo a sc:Cargo ;
+    rdfs:label "F01 Sweet Crude"@en ;
+    sc:carriedByVessel ex:f01-fob-afra-vessel ;
+    sc:hasDischargePort ex:f01-beanr-port ;
+    sc:hasLoadPort ex:f01-rott-port ;
+    sc:hasLoadedQuantity ex:f01-loaded-qty ;
+    sc:measuredAPIGravity 40.0 ;
+    sc:measuredSulfurContent 0.2 .
+
