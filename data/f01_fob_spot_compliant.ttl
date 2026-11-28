@@ -1,20 +1,37 @@
-# Case F01: Compliant FOB `SpotContract`
-#
-# **Scenario:** A clean North Sea FOB spot cargo on an Aframax carrying light # # sweet crude under Incoterms 2020 Edition.
+@prefix as: <https://www.w3.org/ns/activitystreams#>.
+@prefix ex: <https://w3id.org/seaborne-crude/examples#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix sc: <https://w3id.org/seaborne-crude#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 
-@prefix <https://w3id.org/seaborne-crude/> .
+ex:f01-fob-afra-vessel a sc:Vessel;
+  rdfs:label "F01 Clean Freight Vessel"@en;
+  sc:deadweightTonnage 80000.0.
 
-ex:seller_f01 a sc:Party ;
-    rdfs:label "Seller F01"@en ;
-    rdfs:comment "Seller in the compliant FOB spot case."@en .
+ex:f01-fob-spot-contract a sc:SpotContract;
+  rdfs:label "F01 FOB Spot Contract"@en;
+  sc:hasBuyer ex:f01-buyer;
+  sc:hasIncotermEdition sc:Incoterms2020;
+  sc:hasIncotermRule sc:FOB;
+  sc:hasSeller ex:f01-seller.
 
-ex:buyer_f01 a sc:Party ;
-    rdfs:label "Buyer F01"@en ;
-    rdfs:comment "Buyer in the compliant FOB spot case."@en .
+ex:f01-fob-vessel-nor a sc:NoticeOfReadiness;
+  rdfs:label "F01 Clean Freight Vessel NOR"@en;
+  sc:eventDate "2026-06-12"^^xsd:date;
+  sc:forCargo ex:f01-fob-spot-cargo.
 
-ex:f01-fob-spot-contract a sc:SpotContract ;
-    rdfs:label "F01 FOB Spot Contract"@en ;
-    rdfs:comment "F01 FOB Spot Contract"@en ;
-    sc:hasSeller ex:seller_f01 ;
-    sc:hasBuyer ex:buyer_f01 ;
-    
+ex:f01-buyer a sc:Party;
+  rdfs:label "Buyer F01"@en;
+  rdfs:comment "Buyer in the compliant FOB spot case."@en.
+
+ex:f01-fob-spot-cargo a sc:Cargo;
+  rdfs:label "F01 Sweet Crude"@en;
+  sc:cargoQuantity 75000.0.
+
+ex:f01-seller a sc:Party;
+  rdfs:label "Seller F01"@en;
+  rdfs:comment "Seller in the compliant FOB spot case."@en.
+
+ex:f01-laycan a sc:Laycan;
+  sc:laycanStartDate "2026-06-11"^^xsd:date;
+  sc:laycanEndDate "2026-06-14"^^xsd:date.
