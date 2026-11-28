@@ -97,6 +97,15 @@ sc:hasIncotermEdition a owl:FunctionalProperty,
     skos:definition "Links a contract document to its ICC Incoterms edition."@en,
         "Vincula un documento contractual con su edición de Incoterms de la CCI."@es .
 
+sc:riskTransferPoint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "risk transfer point"@en,
+        "punto de transferencia del riesgo"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:RiskTransferPoint ;
+    skos:definition "Links an ICC Incoterm rule to the milestone where cargo risk transfers from seller to buyer"@en,
+        "Vincula una regla Incoterm con el hito en el que el riesgo de la carga se transfiere del vendedor al comprador"@es .
+
 <https://w3id.org/seaborne-crude/incoterms> a owl:Ontology ;
     dcterms:creator "Pau Colomé Diaz" ;
     dcterms:description "Module formalizing Incoterms rules (FOB, CFR, CIF, DAP) on both 2010 and 2020 editions, separating transit risk transfer from freight, insurance, and vessel nomination obligations."@en,
@@ -117,6 +126,7 @@ sc:CFR a owl:NamedIndividual,
     skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship."@en,
         "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
     sc:freightPayer sc:SellerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
     sc:transitRiskBearer sc:BuyerRole ;
     sc:vesselNominator sc:SellerRole .
 
@@ -131,6 +141,7 @@ sc:CIF a owl:NamedIndividual,
         "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
     sc:freightPayer sc:SellerRole ;
     sc:mandatoryInsurancePayer sc:SellerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
     sc:transitRiskBearer sc:BuyerRole ;
     sc:vesselNominator sc:SellerRole .
 
@@ -144,6 +155,7 @@ sc:DAP a owl:NamedIndividual,
     skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point."@en,
         "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto."@es ;
     sc:freightPayer sc:SellerRole ;
+    sc:riskTransferPoint sc:ArrivalAtDestination ;
     sc:transitRiskBearer sc:SellerRole ;
     sc:vesselNominator sc:SellerRole .
 
@@ -157,6 +169,7 @@ sc:FOB a owl:NamedIndividual,
     skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage."@en,
         "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro."@es ;
     sc:freightPayer sc:BuyerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
     sc:transitRiskBearer sc:BuyerRole ;
     sc:vesselNominator sc:BuyerRole .
 
@@ -209,6 +222,13 @@ sc:mandatoryInsurancePayer a owl:FunctionalProperty,
     skos:note "Applies to CIF only (ICC Clause C, at least 110% of contract value); FOB, CFR, and DAP require no insurance."@en,
         "Aplica solo a CIF (Cláusula C de ICC, al menos el 110% del valor del contrato); FOB, CFR y DAP no exigen seguro."@es .
 
+sc:ArrivalAtDestination a owl:NamedIndividual,
+        sc:RiskTransferPoint ;
+    rdfs:label "Arrival at Destination"@en,
+        "Llegada a Destino"@es ;
+    skos:definition "Cargo risk transfers from seller to buyer when the goods arrive at destination port ready for unloading"@en,
+        "La transferencia del riesgo de la carga entre vendedor y comprador se produce en destino cuando los bienes están listos para descargar"@es .
+
 sc:freightPayer a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "freight payer"@en,
@@ -241,6 +261,19 @@ sc:IncotermEdition a owl:Class ;
         "Edición de Incoterms"@es ;
     skos:definition "Published edition of the ICC Incoterms rules."@en,
         "Edición publicada de las reglas Incoterms de la CCI."@es .
+
+sc:OnBoardAtLoadPort a owl:NamedIndividual,
+        sc:RiskTransferPoint ;
+    rdfs:label "On Board at Load Port"@en,
+        "A Bordo en el Puerto de Carga"@es ;
+    skos:definition "Cargo risk transfers from seller to buyer when the goods are on board the vessel at the load port"@en,
+        "El riesgo de la carga se transfiere del vendedor al comprador cuando los bienes se cargan a bordo del buque en el puerto de carga"@es .
+
+sc:RiskTransferPoint a owl:Class ;
+    rdfs:label "Risk Transfer Point"@en,
+        "Punto de Transferencia de Riesgo"@es ;
+    skos:definition "Point at which risk transfers from a Contractual Role to the other party"@en,
+        "Punto en el que se realiza la transferencia de riesgo de un rol contractual a la otra contraparte"@es .
 
 sc:ContractualRole a owl:Class ;
     rdfs:label "Contractual Role"@en,
@@ -278,7 +311,7 @@ sc:SellerRole a owl:NamedIndividual,
         "Rol contractual del vendedor."@es .
 
 [] a owl:AllDisjointClasses ;
-    owl:members ( sc:IncotermRule sc:IncotermEdition sc:ContractualRole sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit ) .
+    owl:members ( sc:IncotermRule sc:IncotermEdition sc:ContractualRole sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit sc:RiskTransferPoint ) .
 
 [] a owl:AllDifferent ;
     owl:distinctMembers ( sc:BuyerRole sc:SellerRole ) .
@@ -288,4 +321,7 @@ sc:SellerRole a owl:NamedIndividual,
 
 [] a owl:AllDifferent ;
     owl:distinctMembers ( sc:FOB sc:CFR sc:CIF sc:DAP ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:ArrivalAtDestination sc:OnBoardAtLoadPort ) .
 
