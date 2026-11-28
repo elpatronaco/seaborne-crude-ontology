@@ -56,11 +56,14 @@ sc:hasCargo a owl:ObjectProperty ;
     skos:definition "Reference to the cargo loaded on the vessel"@en,
         "Referencia a la carga cargada en el buque"@es .
 
-sc:hasDischargedQuantity a owl:FunctionalProperty ;
+sc:hasDischargedQuantity a owl:FunctionalProperty,
+        owl:ObjectProperty ;
     rdfs:label "has discharged quantity"@en,
         "tiene cantidad descargada"@es ;
     rdfs:domain sc:Cargo ;
-    rdfs:range sc:CargoQuantity .
+    rdfs:range sc:CargoQuantity ;
+    skos:definition "Reference to the outturn quantity of cargo discharged from the vessel at destination."@en,
+        "Referencia a la cantidad descargada del cargamento del buque en destino."@es .
 
 sc:hasLaycan a owl:FunctionalProperty,
         owl:ObjectProperty ;
