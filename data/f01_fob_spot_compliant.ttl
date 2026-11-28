@@ -1,0 +1,20 @@
+# Case F01: Compliant FOB `SpotContract`
+#
+# **Scenario:** A clean North Sea FOB spot cargo on an Aframax carrying light # # sweet crude under Incoterms 2020 Edition.
+
+@prefix <https://w3id.org/seaborne-crude/> .
+
+ex:seller_f01 a sc:Party ;
+    rdfs:label "Seller F01"@en ;
+    rdfs:comment "Seller in the compliant FOB spot case."@en .
+
+ex:buyer_f01 a sc:Party ;
+    rdfs:label "Buyer F01"@en ;
+    rdfs:comment "Buyer in the compliant FOB spot case."@en .
+
+ex:f01-fob-spot-contract a sc:SpotContract ;
+    rdfs:label "F01 FOB Spot Contract"@en ;
+    rdfs:comment "F01 FOB Spot Contract"@en ;
+    sc:hasSeller ex:seller_f01 ;
+    sc:hasBuyer ex:buyer_f01 ;
+    
