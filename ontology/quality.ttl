@@ -32,7 +32,8 @@ sc:hasQualitySpecification a owl:ObjectProperty ;
     skos:definition "Links a contract to one of its guaranteed or typical quality specifications."@en,
         "Vincula un contrato con una de sus especificaciones de calidad garantizadas o típicas."@es .
 
-sc:maxAPIGravity a owl:DatatypeProperty ;
+sc:maxAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
     rdfs:label "Maximum API Gravity"@en,
         "Gravedad API máxima"@es ;
     rdfs:domain sc:QualitySpecification ;
@@ -40,7 +41,8 @@ sc:maxAPIGravity a owl:DatatypeProperty ;
     skos:definition "Maximum API gravity agreed in a quality specification."@en,
         "Gravedad API máxima acordada en una especificación de calidad."@es .
 
-sc:maxSulfurContent a owl:DatatypeProperty ;
+sc:maxSulfurContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
     rdfs:label "Maximum Sulfur Content"@en,
         "Contenido máximo de azufre"@es ;
     rdfs:domain sc:QualitySpecification ;
@@ -48,7 +50,8 @@ sc:maxSulfurContent a owl:DatatypeProperty ;
     skos:definition "Maximum sulfur weight percentage agreed in a quality specification."@en,
         "Porcentaje máximo de azufre en peso acordado en una especificación de calidad."@es .
 
-sc:minAPIGravity a owl:DatatypeProperty ;
+sc:minAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
     rdfs:label "Minimum API Gravity"@en,
         "Gravedad API mínima"@es ;
     rdfs:domain sc:QualitySpecification ;
@@ -56,7 +59,8 @@ sc:minAPIGravity a owl:DatatypeProperty ;
     skos:definition "Minimum API gravity agreed in a quality specification."@en,
         "Gravedad API mínima acordada en una especificación de calidad."@es .
 
-sc:typicalAPIGravity a owl:DatatypeProperty ;
+sc:typicalAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
     rdfs:label "Typical API Gravity"@en,
         "Gravedad API típica"@es ;
     rdfs:domain sc:QualitySpecification ;
@@ -64,7 +68,8 @@ sc:typicalAPIGravity a owl:DatatypeProperty ;
     skos:definition "Expected API gravity stated for information in a quality specification."@en,
         "Gravedad API esperada indicada a título informativo en una especificación de calidad."@es .
 
-sc:typicalSulfurContent a owl:DatatypeProperty ;
+sc:typicalSulfurContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
     rdfs:label "Typical Sulfur Content"@en,
         "Contenido de azufre típico"@es ;
     rdfs:domain sc:QualitySpecification ;
