@@ -44,6 +44,24 @@ ex:v_suez a sc:Vessel ;
 ex:v_vlcc a sc:Vessel ;
     sc:deadweightTonnage 280000.0 .
 
+ex:v_below_afra a sc:Vessel ;
+    sc:deadweightTonnage 79999.9 .
+
+ex:v_afra_min a sc:Vessel ;
+    sc:deadweightTonnage 80000.0 .
+
+ex:v_afra_max a sc:Vessel ;
+    sc:deadweightTonnage 119999.9 .
+
+ex:v_suez_min a sc:Vessel ;
+    sc:deadweightTonnage 120000.0 .
+
+ex:v_suez_max a sc:Vessel ;
+    sc:deadweightTonnage 199999.9 .
+
+ex:v_vlcc_min a sc:Vessel ;
+    sc:deadweightTonnage 200000.0 .
+
 ex:port_ras_tanura a sc:Port .
 ex:port_rotterdam a sc:Port .
 
@@ -137,6 +155,12 @@ ex:load1 a sc:LoadingEvent ;
         EX.v_afra: {SC.Aframax},
         EX.v_suez: {SC.Suezmax},
         EX.v_vlcc: {SC.VLCC},
+        EX.v_below_afra: set(),
+        EX.v_afra_min: {SC.Aframax},
+        EX.v_afra_max: {SC.Aframax},
+        EX.v_suez_min: {SC.Suezmax},
+        EX.v_suez_max: {SC.Suezmax},
+        EX.v_vlcc_min: {SC.VLCC},
     }
     for vessel, expected_classes in expected_vessels.items():
         actual_classes = set(g.objects(vessel, RDF.type)) & AFRA_CLASSES
