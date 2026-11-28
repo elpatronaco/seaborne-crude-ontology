@@ -1,0 +1,151 @@
+@prefix cmns-doc: <https://www.omg.org/spec/Commons/Documents/> .
+@prefix cmns-pts: <https://www.omg.org/spec/Commons/PartiesAndSituations/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fibo-der-cm-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/CommoditiesContracts/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pmd-log: <https://w3id.org/pmd/log/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+skos:closeMatch a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+skos:exactMatch a owl:AnnotationProperty .
+
+sc:Barrel skos:exactMatch unit:BBL .
+
+sc:Cargo skos:closeMatch pmd-log:LOG_1000025,
+        pmd-log:LOG_1000051 .
+
+sc:CargoQuantity rdfs:subClassOf qudt:QuantityValue .
+
+sc:ContractDocument rdfs:subClassOf fibo-fnd-agr-ctr:ContractDocument .
+
+sc:GuaranteedSpecification rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment .
+
+sc:IncotermRule rdfs:subClassOf fibo-fbc-fi-fi:StandardizedTerms .
+
+sc:LogisticsEvent skos:closeMatch pmd-log:LOG_1000120 .
+
+sc:MetricTonne skos:exactMatch unit:TON_Metric .
+
+sc:NoticeOfReadiness skos:closeMatch cmns-doc:Notice .
+
+sc:Party rdfs:subClassOf cmns-pts:Party .
+
+sc:PhysicalCrudeContract rdfs:subClassOf fibo-fnd-agr-ctr:BilateralContract,
+        fibo-fnd-agr-ctr:WrittenContract .
+
+sc:Port skos:closeMatch pmd-log:LOG_1000090 .
+
+sc:QualitySpecification rdfs:subClassOf fibo-fnd-agr-ctr:ContractualElement .
+
+sc:QuantityUnit rdfs:subClassOf qudt:Unit .
+
+sc:SpotContract skos:closeMatch fibo-der-cm-ctr:CommoditySpotContract .
+
+sc:TypicalSpecification rdfs:subClassOf fibo-fnd-agr-ctr:NonBindingTerm .
+
+sc:Vessel skos:closeMatch pmd-log:LOG_1000041 .
+
+<https://w3id.org/seaborne-crude/alignments> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Bridge module aligning the seaborne-crude domain ontology with external vocabularies (QUDT, FIBO, PMDCo Logistics, and deferred GLEIF)."@en,
+        "Módulo puente que alinea la ontología de comercio marítimo de crudo con vocabularios externos (QUDT, FIBO, PMDCo Logistics y GLEIF diferido)."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology: External Alignments Module"@en,
+        "Ontología de Comercio Marítimo de Crudo: Módulo de Alineamientos Externos"@es ;
+    rdfs:comment "Lightweight soft IRI alignments without owl:imports. GLEIF L1/L2 alignment is deferred to Iteration 2 (PEC4) in entities.ttl."@en ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/alignments/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+
+qudt:QuantityValue a owl:Class ;
+    rdfs:label "Quantity Value (QUDT)"@en ;
+    rdfs:comment "Verified QUDT class for numeric quantity-unit pairs."@en .
+
+qudt:Unit a owl:Class ;
+    rdfs:label "Unit (QUDT)"@en ;
+    rdfs:comment "Verified QUDT base class for measurement units."@en .
+
+unit:BBL a owl:NamedIndividual ;
+    rdfs:label "Barrel (QUDT)"@en ;
+    rdfs:comment "Verified QUDT unit IRI for oil/volume barrel."@en .
+
+unit:TON_Metric a owl:NamedIndividual ;
+    rdfs:label "Metric Ton (QUDT)"@en ;
+    rdfs:comment "Verified QUDT unit IRI for metric tonne (1,000 kg; qudt:exactMatch unit:TONNE in QUDT)."@en .
+
+fibo-der-cm-ctr:CommoditySpotContract a owl:Class ;
+    rdfs:label "Commodity Spot Contract (FIBO)"@en ;
+    rdfs:comment "Verified FIBO DER class; aligned via skos:closeMatch only to avoid importing financial-instrument axioms."@en .
+
+fibo-fbc-fi-fi:StandardizedTerms a owl:Class ;
+    rdfs:label "Standardized Terms (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FBC class for standardized contract terms published by an organization and incorporated by reference."@en .
+
+fibo-fnd-agr-ctr:BilateralContract a owl:Class ;
+    rdfs:label "Bilateral Contract (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for two-party written contracts."@en .
+
+fibo-fnd-agr-ctr:ContractDocument a owl:Class ;
+    rdfs:label "Contract Document (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for legal documents recording formal contract terms."@en .
+
+fibo-fnd-agr-ctr:ContractualCommitment a owl:Class ;
+    rdfs:label "Contractual Commitment (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for a binding provision specifying something the contracting parties agree to fulfill."@en .
+
+fibo-fnd-agr-ctr:ContractualElement a owl:Class ;
+    rdfs:label "Contractual Element (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for an arrangement, provision, requirement, rule, specification, or standard forming part of an agreement."@en .
+
+fibo-fnd-agr-ctr:NonBindingTerm a owl:Class ;
+    rdfs:label "Non-Binding Term (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for a contractual element that is not legally binding on any party."@en .
+
+fibo-fnd-agr-ctr:WrittenContract a owl:Class ;
+    rdfs:label "Written Contract (FIBO)"@en ;
+    rdfs:comment "Verified FIBO FND class for formal contracts written and signed by the parties."@en .
+
+pmd-log:LOG_1000025 a owl:Class ;
+    rdfs:label "cargo (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a material entity transported using transport equipment by a carrier; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000041 a owl:Class ;
+    rdfs:label "piece of transport equipment (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for equipment holding and transporting material entities; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000051 a owl:Class ;
+    rdfs:label "shipment (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a collection of material entities delivered together; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000090 a owl:Class ;
+    rdfs:label "supply chain node (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a geospatial site of a supply chain process; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+pmd-log:LOG_1000120 a owl:Class ;
+    rdfs:label "logistics process (PMDCo Logistics)"@en ;
+    rdfs:comment "Verified PMDCo Logistics class for a business process involving transport, preparation, storage, or receiving; aligned via skos:closeMatch to avoid BFO coupling."@en .
+
+cmns-doc:Notice a owl:Class ;
+    rdfs:label "Notice (OMG Commons)"@en ;
+    rdfs:comment "Verified OMG Commons Documents class for formal announcements or intimations; aligned via skos:closeMatch to avoid mixing events and documents."@en .
+
+cmns-pts:Party a owl:Class ;
+    rdfs:label "Party (OMG Commons)"@en ;
+    rdfs:comment "Verified OMG Commons class used by FIBO FND Parties for an entity participating in an agreement."@en .
+

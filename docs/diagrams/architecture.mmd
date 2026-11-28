@@ -1,0 +1,70 @@
+%%{init: {
+  "theme": "base",
+  "fontFamily": "Inter, Helvetica, Arial, sans-serif",
+  "themeCSS": ".nodeLabel, .edgeLabel, .cluster-label, .label, foreignObject div, foreignObject span, text { font-family: Inter, Helvetica, Arial, sans-serif !important; }",
+  "themeVariables": {
+    "fontFamily": "Inter, Helvetica, Arial, sans-serif",
+    "fontSize": "13px",
+    "primaryColor": "#ffffff",
+    "primaryTextColor": "#1a1a1a",
+    "primaryBorderColor": "#4d4d4d",
+    "lineColor": "#4d4d4d",
+    "clusterBkg": "#f4f4f4",
+    "clusterBorder": "#9a9a9a",
+    "edgeLabelBackground": "#ffffff"
+  },
+  "flowchart": { "curve": "basis", "nodeSpacing": 58, "rankSpacing": 30, "padding": 10 }
+}}%%
+flowchart TB
+    subgraph TBOX["<b>Ontología OWL 2 DL</b> (iteración 1)"]
+        direction TB
+        MAIN["<b>seaborne-crude.ttl</b><br/>Módulo integrador"]
+        CORE["<b>core-contract.ttl</b><br/>Contrato, recap, GT&Cs,<br/>partes y cantidad"]
+        INCO["<b>incoterms.ttl</b><br/>FOB, CFR, CIF, DAP,<br/>riesgo, flete y seguro"]
+        QUAL["<b>quality.ttl</b><br/>Especificación garantizada<br/>o typical, API, azufre, medición"]
+        ENT["<b>entities.ttl</b><br/>Esqueleto; GLEIF L1 y L2<br/>en la iteración 2"]
+        ALIGN["<b>alignments.ttl</b><br/>Alineamiento blando con<br/>FIBO, PMDCo LOG y QUDT"]
+        LOG["<b>logistics.ttl</b><br/>Cargamento, buque AFRA,<br/>puertos, laycan y eventos"]
+    end
+
+    subgraph VAL["<b>Verificación y validación</b> (iteración 1)"]
+        direction LR
+        DATA["<b>Recaps sintéticos</b><br/>Entre 3 y 5 casos de prueba"]
+        HERMIT["<b>Razonador HermiT</b><br/>Consistencia y clasificación<br/>de riesgo y calidad EIA"]
+        SHACL["<b>Validación SHACL</b><br/>Mundo cerrado: laycan,<br/>garantizados y nominación"]
+        DATA --> HERMIT
+        HERMIT -- grafo materializado --> SHACL
+    end
+
+    subgraph EXT["<b>Vocabularios externos</b>"]
+        direction LR
+        SOFT["<b>FIBO, PMDCo LOG y QUDT</b><br/>Reutilización blanda por IRI"]
+        TIME["<b>OWL-Time</b><br/>Reutilización dura"]
+    end
+
+    %% imports entre módulos
+    MAIN -. iteración 2 .-> ENT
+    MAIN -- owl:imports --> CORE
+    MAIN -- owl:imports --> INCO
+    MAIN -- owl:imports --> QUAL
+    MAIN -- owl:imports --> ALIGN
+    MAIN -- owl:imports --> LOG
+
+    %% dependencias externas
+    ALIGN -. subClassOf y closeMatch .-> SOFT
+    LOG -- owl:imports --> TIME
+
+    %% la ontología alimenta al razonador
+    TBOX -- T-Box --> VAL
+
+    linkStyle default stroke:#4d4d4d,stroke-width:1.2px
+
+    classDef box fill:#ffffff,stroke:#4d4d4d,stroke-width:1px,color:#1a1a1a
+    classDef onto fill:#e9eef6,stroke:#2f4f7f,stroke-width:1.5px,color:#1a1a1a
+    classDef out fill:#ffffff,stroke:#1a1a1a,stroke-width:1.5px,color:#1a1a1a
+    class CORE,INCO,QUAL,ENT,ALIGN,LOG,TIME,SOFT,DATA,HERMIT box
+    class MAIN onto
+    class SHACL out
+    style TBOX fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style EXT fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px
+    style VAL fill:#f4f4f4,stroke:#9a9a9a,stroke-width:1px

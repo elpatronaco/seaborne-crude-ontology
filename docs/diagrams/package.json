@@ -1,0 +1,12 @@
+{
+  "name": "seaborne-crude-diagrams",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mermaid sources and render tooling for the report figures",
+  "scripts": {
+    "render:png": "sh -c '[ -n \"$1\" ] || { echo \"usage: npm run render:png -- <diagram-name>\" >&2; exit 1; }; mmdc -i \"${1%.mmd}.mmd\" -o \"${1%.mmd}.png\" -s 4 -b white' render"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "12.2.0"
+  }
+}

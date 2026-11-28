@@ -1,0 +1,103 @@
+@prefix ex: <https://w3id.org/seaborne-crude/examples#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:f01-fob-spot-contract a sc:SpotContract ;
+    rdfs:label "F01 FOB Spot Contract"@en ;
+    sc:backedByRecap ex:f01-sweet-crude-recap ;
+    sc:contractDate "2026-05-25"^^xsd:date ;
+    sc:contractId "SC-2026-F01" ;
+    sc:hasBuyer ex:f01-buyer ;
+    sc:hasCargo ex:f01-sweet-crude-cargo ;
+    sc:hasContractedQuantity ex:f01-contracted-qty ;
+    sc:hasIncotermRule sc:FOB ;
+    sc:hasQualitySpecification ex:f01-guar-spec ;
+    sc:hasSeller ex:f01-seller ;
+    sc:incorporatesGTC ex:f01-gtc ;
+    sc:operationalTolerancePercent 5.0 .
+
+ex:f01-fob-vessel-nor a sc:NoticeOfReadiness ;
+    rdfs:label "F01 Clean Freight Vessel NOR"@en ;
+    sc:eventDate "2026-06-10"^^xsd:date ;
+    sc:forCargo ex:f01-sweet-crude-cargo .
+
+ex:f01-loading-event a sc:LoadingEvent ;
+    rdfs:label "F01 Sweet Crude Load"@en ;
+    sc:eventDate "2026-06-15"^^xsd:date ;
+    sc:forCargo ex:f01-sweet-crude-cargo .
+
+ex:f01-vessel-nomination a sc:VesselNomination ;
+    rdfs:label "F01 Vessel Nomination"@en ;
+    sc:eventDate "2026-06-01"^^xsd:date ;
+    sc:forCargo ex:f01-sweet-crude-cargo ;
+    sc:nominatesVessel ex:f01-fob-afra-vessel .
+
+ex:f01-beanr-port a sc:Port ;
+    rdfs:label "Antwerp"@en ;
+    skos:altLabel "BEANR" .
+
+ex:f01-buyer a sc:Party ;
+    rdfs:label "Buyer F01"@en ;
+    rdfs:comment "Buyer in the compliant FOB spot case."@en .
+
+ex:f01-contracted-qty a sc:CargoQuantity ;
+    rdfs:label "F01 Contracted Quantity"@en ;
+    sc:hasQuantityUnit sc:MetricTonne ;
+    sc:quantityValue 75000.0 .
+
+ex:f01-gtc a sc:GTC ;
+    rdfs:label "F01 Standard GTC"@en ;
+    sc:hasIncotermEdition sc:Incoterms2020 ;
+    sc:nominationNoticeDays 8 .
+
+ex:f01-guar-spec a sc:GuaranteedSpecification ;
+    rdfs:label "F01 Guaranteed Specification"@en ;
+    sc:maxAPIGravity 42.0 ;
+    sc:maxSulfurContent 0.50 ;
+    sc:minAPIGravity 35.0 .
+
+ex:f01-laycan a sc:Laycan ;
+    time:hasBeginning ex:f01-laycan-start ;
+    time:hasEnd ex:f01-laycan-end ;
+    sc:laycanEndDate "2026-06-14"^^xsd:date ;
+    sc:laycanStartDate "2026-06-11"^^xsd:date .
+
+ex:f01-laycan-end a time:Instant ;
+    time:inXSDDate "2026-06-14"^^xsd:date .
+
+ex:f01-laycan-start a time:Instant ;
+    time:inXSDDate "2026-06-11"^^xsd:date .
+
+ex:f01-loaded-qty a sc:CargoQuantity ;
+    rdfs:label "F01 Loaded Quantity"@en ;
+    sc:hasQuantityUnit sc:MetricTonne ;
+    sc:quantityValue 74945.0 .
+
+ex:f01-rott-port a sc:Port ;
+    rdfs:label "Rotterdam"@en ;
+    skos:altLabel "ROTT" .
+
+ex:f01-seller a sc:Party ;
+    rdfs:label "Seller F01"@en ;
+    rdfs:comment "Seller in the compliant FOB spot case."@en .
+
+ex:f01-sweet-crude-recap a sc:DealRecap ;
+    rdfs:label "F01 Sweet Crude Recap"@en .
+
+ex:f01-fob-afra-vessel a sc:Vessel ;
+    rdfs:label "F01 Clean Freight Vessel"@en ;
+    sc:deadweightTonnage 80000.0 .
+
+ex:f01-sweet-crude-cargo a sc:Cargo ;
+    rdfs:label "F01 Sweet Crude"@en ;
+    sc:carriedByVessel ex:f01-fob-afra-vessel ;
+    sc:hasDischargePort ex:f01-beanr-port ;
+    sc:hasLaycan ex:f01-laycan ;
+    sc:hasLoadPort ex:f01-rott-port ;
+    sc:hasLoadedQuantity ex:f01-loaded-qty ;
+    sc:measuredAPIGravity 40.0 ;
+    sc:measuredSulfurContent 0.2 .
+

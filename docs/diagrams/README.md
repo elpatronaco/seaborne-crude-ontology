@@ -4,12 +4,25 @@ Source code of the diagrams within the Final Degree Project in code. Diagrams ar
 
 ## Prerequisites
 
-Mermaid sources for the figures in the report. Export them with the [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli) (requires Node.js; `npx` downloads it on first run).
-
-## Render
+Mermaid sources for the figures in the report. Export them with the [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli) (requires Node.js). The CLI version is pinned in `package.json`; install it once:
 
 ```bash
 cd docs/diagrams
+npm install
+```
+
+## Render
+
+High-res PNG (4x scale, white background) for the paper. Pass the diagram name, with or without `.mmd`:
+
+```bash
+npm run render:png -- architecture        # -> architecture.png
+npm run render:png -- general-design.mmd  # -> general-design.png
+```
+
+Other formats, without installing anything:
+
+```bash
 
 # vector PDF, cropped to the diagram (best for LaTeX)
 npx -p @mermaid-js/mermaid-cli mmdc -i {file_name}.mmd -o {file_name}.pdf -b white

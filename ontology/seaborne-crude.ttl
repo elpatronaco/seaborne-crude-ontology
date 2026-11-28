@@ -1,0 +1,41 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+<https://w3id.org/seaborne-crude> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Modular OWL 2 DL integrator ontology for physical seaborne-traded crude oil sales contracts, Incoterms (FOB, CFR, CIF, DAP), logistics, laycan, crude quality and business groups."@en,
+        "Ontología integradora modular en OWL 2 DL para contratos físicos de compraventa marítima de crudo, Incoterms (FOB, CFR, CIF, DAP), logística, ventana laycan, calidad del crudo y grupos empresariales."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology"@en,
+        "Ontología para la Compraventa Física y Transporte Marítimo de Crudo"@es ;
+    vann:preferredNamespacePrefix "sc" ;
+    vann:preferredNamespaceUri "https://w3id.org/seaborne-crude#" ;
+    owl:imports <https://w3id.org/seaborne-crude/alignments>,
+        <https://w3id.org/seaborne-crude/core-contract>,
+        <https://w3id.org/seaborne-crude/incoterms>,
+        <https://w3id.org/seaborne-crude/logistics>,
+        <https://w3id.org/seaborne-crude/quality> ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit sc:IncotermRule sc:IncotermEdition sc:ContractualRole sc:RiskTransferPoint sc:Vessel sc:Cargo sc:Port sc:Laycan sc:LogisticsEvent sc:QualitySpecification ) .
+

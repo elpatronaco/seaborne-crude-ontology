@@ -1,0 +1,14 @@
+[project]
+name = "seaborne-crude-ontology"
+version = "0.1.0"
+description = "OWL 2 DL ontology, SHACL validation shapes, and test suite for seaborne-traded physical crude oil"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "rdflib>=7.6.0",
+    "pyshacl>=0.40.2",
+    "pytest>=7.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

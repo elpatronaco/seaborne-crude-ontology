@@ -1,0 +1,191 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+sc:GuaranteedSpecification a owl:Class ;
+    rdfs:label "Guaranteed Specification"@en,
+        "Especificación Garantizada"@es ;
+    rdfs:subClassOf sc:QualitySpecification ;
+    owl:disjointWith sc:TypicalSpecification ;
+    skos:definition "Binding quality limits that the delivered or loaded cargo must meet."@en,
+        "Límites de calidad vinculantes que la carga embarcada o entregada debe cumplir."@es .
+
+sc:hasQualitySpecification a owl:ObjectProperty ;
+    rdfs:label "has quality specification"@en,
+        "tiene especificación de calidad"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:QualitySpecification ;
+    skos:definition "Links a contract to one of its guaranteed or typical quality specifications."@en,
+        "Vincula un contrato con una de sus especificaciones de calidad garantizadas o típicas."@es .
+
+sc:maxAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum API Gravity"@en,
+        "Gravedad API máxima"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Maximum API gravity agreed in a quality specification."@en,
+        "Gravedad API máxima acordada en una especificación de calidad."@es .
+
+sc:maxSulfurContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Maximum Sulfur Content"@en,
+        "Contenido máximo de azufre"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Maximum sulfur weight percentage agreed in a quality specification."@en,
+        "Porcentaje máximo de azufre en peso acordado en una especificación de calidad."@es .
+
+sc:minAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Minimum API Gravity"@en,
+        "Gravedad API mínima"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Minimum API gravity agreed in a quality specification."@en,
+        "Gravedad API mínima acordada en una especificación de calidad."@es .
+
+sc:typicalAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Typical API Gravity"@en,
+        "Gravedad API típica"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Expected API gravity stated for information in a quality specification."@en,
+        "Gravedad API esperada indicada a título informativo en una especificación de calidad."@es .
+
+sc:typicalSulfurContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Typical Sulfur Content"@en,
+        "Contenido de azufre típico"@es ;
+    rdfs:domain sc:QualitySpecification ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Expected sulfur weight percentage stated for information in a quality specification."@en,
+        "Porcentaje de azufre en peso esperado indicado a título informativo en una especificación de calidad."@es .
+
+<https://w3id.org/seaborne-crude/quality> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Module formalizing crude quality terms: guaranteed and typical specifications, and measured API gravity and sulfur content."@en,
+        "Módulo que formaliza los términos de calidad del crudo: especificaciones garantizadas y típicas, y valores medidos de gravedad API y contenido de azufre."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology: Crude Quality Module"@en,
+        "Ontología de Comercio Marítimo de Crudo: Módulo de Calidad del Crudo"@es ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/quality/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+
+sc:HeavyCrudeCargo a owl:Class ;
+    rdfs:label "Heavy Crude Cargo"@en,
+        "Cargamento de Crudo Pesado"@es ;
+    rdfs:subClassOf sc:Cargo ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
+                        owl:onProperty sc:measuredAPIGravity ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:maxInclusive 22.0 ] ) ] ] ) ] ;
+    skos:definition "Crude cargo with measured API gravity of 22.0 degrees or less (EIA)."@en,
+        "Cargamento de crudo con una gravedad API medida de 22.0 grados o menos (EIA)."@es .
+
+sc:IntermediateCrudeCargo a owl:Class ;
+    rdfs:label "Intermediate Crude Cargo"@en,
+        "Cargamento de Crudo Intermedio"@es ;
+    rdfs:subClassOf sc:Cargo ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
+                        owl:onProperty sc:measuredAPIGravity ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minExclusive 22.0 ] [ xsd:maxInclusive 38.0 ] ) ] ] ) ] ;
+    skos:definition "Crude cargo with measured API gravity above 22.0 and up to 38.0 degrees (EIA)."@en,
+        "Cargamento de crudo con una gravedad API medida superior a 22.0 y hasta 38.0 grados (EIA)."@es .
+
+sc:LightCrudeCargo a owl:Class ;
+    rdfs:label "Light Crude Cargo"@en,
+        "Cargamento de Crudo Ligero"@es ;
+    rdfs:subClassOf sc:Cargo ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
+                        owl:onProperty sc:measuredAPIGravity ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minExclusive 38.0 ] ) ] ] ) ] ;
+    skos:definition "Crude cargo with measured API gravity above 38.0 degrees (EIA)."@en,
+        "Cargamento de crudo con una gravedad API medida superior a 38.0 grados (EIA)."@es .
+
+sc:SourCrudeCargo a owl:Class ;
+    rdfs:label "Sour Crude Cargo"@en,
+        "Cargamento de Crudo Ácido"@es ;
+    rdfs:subClassOf sc:Cargo ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
+                        owl:onProperty sc:measuredSulfurContent ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:minExclusive 0.5 ] ) ] ] ) ] ;
+    skos:definition "Crude cargo with measured sulfur content above 0.5 weight percent (EIA)."@en,
+        "Cargamento de crudo con un contenido medido de azufre superior al 0.5 por ciento en peso (EIA)."@es .
+
+sc:SweetCrudeCargo a owl:Class ;
+    rdfs:label "Sweet Crude Cargo"@en,
+        "Cargamento de Crudo Dulce"@es ;
+    rdfs:subClassOf sc:Cargo ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
+                        owl:onProperty sc:measuredSulfurContent ;
+                        owl:someValuesFrom [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:decimal ;
+                                owl:withRestrictions ( [ xsd:maxInclusive 0.5 ] ) ] ] ) ] ;
+    skos:definition "Crude cargo with measured sulfur content of 0.5 weight percent or less (EIA)."@en,
+        "Cargamento de crudo con un contenido medido de azufre de 0.5 por ciento en peso o menos (EIA)."@es .
+
+sc:TypicalSpecification a owl:Class ;
+    rdfs:label "Typical Specification"@en,
+        "Especificación Típica"@es ;
+    rdfs:subClassOf sc:QualitySpecification ;
+    skos:definition "Informational quality values expected from the crude grade, without binding liability."@en,
+        "Valores informativos esperados del tipo de crudo, sin responsabilidad vinculante."@es .
+
+sc:measuredSulfurContent a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Measured Sulfur Content"@en,
+        "Contenido de azufre medido"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Authoritative sulfur weight percentage measured for a cargo."@en,
+        "Porcentaje oficial de azufre en peso medido para un cargamento."@es .
+
+sc:measuredAPIGravity a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:label "Measured API Gravity"@en,
+        "Gravedad API medida"@es ;
+    rdfs:domain sc:Cargo ;
+    rdfs:range xsd:decimal ;
+    skos:definition "Authoritative API gravity measured for a cargo."@en,
+        "Gravedad API oficial medida para un cargamento."@es .
+
+sc:QualitySpecification a owl:Class ;
+    rdfs:label "Quality Specification"@en,
+        "Especificación de Calidad"@es ;
+    skos:definition "Contractual crude oil quality terms, either binding guarantees or typical values."@en,
+        "Términos contractuales de calidad del crudo, ya sean garantías vinculantes o valores típicos."@es .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:HeavyCrudeCargo sc:IntermediateCrudeCargo sc:LightCrudeCargo ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:SweetCrudeCargo sc:SourCrudeCargo ) .
+

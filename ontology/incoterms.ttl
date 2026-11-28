@@ -1,0 +1,327 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sc: <https://w3id.org/seaborne-crude#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+dcterms:creator a owl:AnnotationProperty .
+
+dcterms:description a owl:AnnotationProperty .
+
+dcterms:license a owl:AnnotationProperty .
+
+dcterms:title a owl:AnnotationProperty .
+
+skos:altLabel a owl:AnnotationProperty .
+
+skos:definition a owl:AnnotationProperty .
+
+skos:note a owl:AnnotationProperty .
+
+sc:BuyerFreightContract a owl:Class ;
+    rdfs:label "Buyer Freight Contract"@en,
+        "Contrato con Flete del Comprador"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:BuyerRole ;
+                    owl:onProperty sc:freightPayer ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule requires the buyer to contract and pay for main sea freight (FOB)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm obliga al comprador a contratar y pagar el flete marítimo principal (FOB)."@es .
+
+sc:BuyerTransitRiskContract a owl:Class ;
+    rdfs:label "Buyer Transit Risk Contract"@en,
+        "Contrato con Riesgo en Tránsito del Comprador"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:BuyerRole ;
+                    owl:onProperty sc:transitRiskBearer ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule allocates cargo loss or damage risk during sea transit to the buyer (FOB, CFR, CIF)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm asigna al comprador el riesgo de pérdida o daño de la carga durante el tránsito marítimo (FOB, CFR, CIF)."@es .
+
+sc:BuyerVesselNominationContract a owl:Class ;
+    rdfs:label "Buyer Vessel Nomination Contract"@en,
+        "Contrato con Nominación de Buque del Comprador"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:BuyerRole ;
+                    owl:onProperty sc:vesselNominator ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule requires the buyer to nominate the carrying vessel (FOB)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm obliga al comprador a nominar el buque transportista (FOB)."@es .
+
+sc:SellerFreightAndTransitRiskContract a owl:Class ;
+    rdfs:label "Seller Freight and Transit Risk Contract"@en,
+        "Contrato con Flete y Riesgo en Tránsito del Vendedor"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( sc:SellerFreightContract sc:SellerTransitRiskContract ) ] ;
+    skos:definition "Physical crude oil sales contract under which the seller bears both main sea freight cost and sea transit risk (DAP; excludes CFR and CIF)."@en,
+        "Contrato físico de compraventa de crudo bajo el cual el vendedor asume tanto el coste del flete marítimo principal como el riesgo en tránsito marítimo (DAP; excluye CFR y CIF)."@es .
+
+sc:SellerInsuredContract a owl:Class ;
+    rdfs:label "Seller-Insured Contract"@en,
+        "Contrato con Seguro Obligatorio del Vendedor"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:SellerRole ;
+                    owl:onProperty sc:mandatoryInsurancePayer ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule requires the seller to arrange and pay for minimum marine cargo insurance (CIF)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm obliga al vendedor a contratar y pagar el seguro marítimo mínimo de la carga (CIF)."@es .
+
+sc:SellerVesselNominationContract a owl:Class ;
+    rdfs:label "Seller Vessel Nomination Contract"@en,
+        "Contrato con Nominación de Buque del Vendedor"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:SellerRole ;
+                    owl:onProperty sc:vesselNominator ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule requires the seller to nominate the carrying vessel (CFR, CIF, DAP)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm obliga al vendedor a nominar el buque transportista (CFR, CIF, DAP)."@es .
+
+sc:hasIncotermEdition a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Incoterm edition"@en,
+        "tiene edición de Incoterms"@es ;
+    rdfs:domain sc:ContractDocument ;
+    rdfs:range sc:IncotermEdition ;
+    skos:definition "Links a contract document to its ICC Incoterms edition."@en,
+        "Vincula un documento contractual con su edición de Incoterms de la CCI."@es .
+
+sc:riskTransferPoint a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "risk transfer point"@en,
+        "punto de transferencia del riesgo"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:RiskTransferPoint ;
+    skos:definition "Links an ICC Incoterm rule to the milestone where cargo risk transfers from seller to buyer"@en,
+        "Vincula una regla Incoterm con el hito en el que el riesgo de la carga se transfiere del vendedor al comprador"@es .
+
+<https://w3id.org/seaborne-crude/incoterms> a owl:Ontology ;
+    dcterms:creator "Pau Colomé Diaz" ;
+    dcterms:description "Module formalizing Incoterms rules (FOB, CFR, CIF, DAP) on both 2010 and 2020 editions, separating transit risk transfer from freight, insurance, and vessel nomination obligations."@en,
+        "Módulo que formaliza las reglas Incoterms (FOB, CFR, CIF, DAP) en sus ediciones 2010 y 2020, separando la transferencia del riesgo en tránsito de las obligaciones de transporte, seguro y nominación del buque."@es ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:title "Seaborne-Traded Crude Oil Ontology: Incoterms Module"@en,
+        "Ontología de Comercio Marítimo de Crudo: Módulo de Incoterms"@es ;
+    owl:versionIRI <https://w3id.org/seaborne-crude/incoterms/0.1.0> ;
+    owl:versionInfo "0.1.0" .
+
+sc:CFR a owl:NamedIndividual,
+        sc:IncotermRule ;
+    rdfs:label "CFR"@en,
+        "CFR"@es ;
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-and-freight-cfr/> ;
+    skos:altLabel "Cost and Freight"@en,
+        "Coste y Flete"@es ;
+    skos:definition "Seller pays for cost and freight on behalf of buyer. Risk is transferred when goods are on the ship."@en,
+        "El vendedor paga el coste y el flete a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:SellerRole .
+
+sc:CIF a owl:NamedIndividual,
+        sc:IncotermRule ;
+    rdfs:label "CIF"@en,
+        "CIF"@es ;
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/cost-insurance-and-freight-cif/> ;
+    skos:altLabel "Cost, Insurance and Freight"@en,
+        "Coste, Seguro y Flete"@es ;
+    skos:definition "Seller pays for cost, freight and a minimum insurance coverage on behalf of buyer. Risk is transferred when goods are on the ship."@en,
+        "El vendedor paga el coste, flete y un seguro mínimo a cuenta del comprador. El riesgo se transfiere cuando las mercancías están a bordo."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:mandatoryInsurancePayer sc:SellerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:SellerRole .
+
+sc:DAP a owl:NamedIndividual,
+        sc:IncotermRule ;
+    rdfs:label "DAP"@en,
+        "DAP"@es ;
+    rdfs:seeAlso <https://www.dhl.com/discover/en-hk/logistics-advice/import-export-advice/dap-delivered-at-place> ;
+    skos:altLabel "Delivered at Place"@en,
+        "Entrega en el Lugar"@es ;
+    skos:definition "Seller delivers goods to an agreed destination, ready for unloading, and bears all transport costs and risk up to that point."@en,
+        "El vendedor entrega la mercancía en un destino acordado, lista para ser descargada, y asume todos los costes y riesgos del transporte hasta ese punto."@es ;
+    sc:freightPayer sc:SellerRole ;
+    sc:riskTransferPoint sc:ArrivalAtDestination ;
+    sc:transitRiskBearer sc:SellerRole ;
+    sc:vesselNominator sc:SellerRole .
+
+sc:FOB a owl:NamedIndividual,
+        sc:IncotermRule ;
+    rdfs:label "FOB"@en,
+        "FOB"@es ;
+    rdfs:seeAlso <https://dhl-freight-connections.com/en/logistics-dictionary/free-on-board-fob/> ;
+    skos:altLabel "Free on Board"@en,
+        "Libre a bordo"@es ;
+    skos:definition "Buyer takes risk once goods are on the ship. Seller does not pay for freight or insurance coverage."@en,
+        "El comprador asume el riesgo una vez que las mercancías están a bordo. El vendedor no paga el flete ni el seguro."@es ;
+    sc:freightPayer sc:BuyerRole ;
+    sc:riskTransferPoint sc:OnBoardAtLoadPort ;
+    sc:transitRiskBearer sc:BuyerRole ;
+    sc:vesselNominator sc:BuyerRole .
+
+sc:Incoterms2010 a owl:NamedIndividual,
+        sc:IncotermEdition ;
+    rdfs:label "Incoterms 2010"@en,
+        "Incoterms 2010"@es ;
+    skos:definition "ICC Incoterms 2010 edition (ICC Publication No. 715)."@en,
+        "Edición Incoterms 2010 de la CCI (Publicación CCI n.º 715)."@es .
+
+sc:Incoterms2020 a owl:NamedIndividual,
+        sc:IncotermEdition ;
+    rdfs:label "Incoterms 2020"@en,
+        "Incoterms 2020"@es ;
+    skos:definition "ICC Incoterms 2020 edition (ICC Publication No. 723)."@en,
+        "Edición Incoterms 2020 de la CCI (Publicación CCI n.º 723)."@es .
+
+sc:SellerFreightContract a owl:Class ;
+    rdfs:label "Seller Freight Contract"@en,
+        "Contrato con Flete del Vendedor"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:SellerRole ;
+                    owl:onProperty sc:freightPayer ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule requires the seller to contract and pay for main sea freight (CFR, CIF, DAP)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm obliga al vendedor a contratar y pagar el flete marítimo principal (CFR, CIF, DAP)."@es .
+
+sc:SellerTransitRiskContract a owl:Class ;
+    rdfs:label "Seller Transit Risk Contract"@en,
+        "Contrato con Riesgo en Tránsito del Vendedor"@es ;
+    rdfs:subClassOf sc:PhysicalCrudeContract ;
+    owl:equivalentClass [ a owl:Restriction ;
+            owl:onProperty sc:hasIncotermRule ;
+            owl:someValuesFrom [ a owl:Restriction ;
+                    owl:hasValue sc:SellerRole ;
+                    owl:onProperty sc:transitRiskBearer ] ] ;
+    skos:definition "Physical crude oil sales contract whose Incoterm rule allocates cargo loss or damage risk during sea transit to the seller (DAP)."@en,
+        "Contrato físico de compraventa de crudo cuya regla Incoterm asigna al vendedor el riesgo de pérdida o daño de la carga durante el tránsito marítimo (DAP)."@es .
+
+sc:mandatoryInsurancePayer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "mandatory insurance payer"@en,
+        "pagador del seguro obligatorio"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role required to arrange and pay for minimum marine cargo insurance under an Incoterms rule."@en,
+        "Rol contractual obligado a contratar y pagar el seguro marítimo mínimo de la carga según una regla Incoterms."@es ;
+    skos:note "Applies to CIF only (ICC Clause C, at least 110% of contract value); FOB, CFR, and DAP require no insurance."@en,
+        "Aplica solo a CIF (Cláusula C de ICC, al menos el 110% del valor del contrato); FOB, CFR y DAP no exigen seguro."@es .
+
+sc:ArrivalAtDestination a owl:NamedIndividual,
+        sc:RiskTransferPoint ;
+    rdfs:label "Arrival at Destination"@en,
+        "Llegada a Destino"@es ;
+    skos:definition "Cargo risk transfers from seller to buyer when the goods arrive at destination port ready for unloading"@en,
+        "La transferencia del riesgo de la carga entre vendedor y comprador se produce en destino cuando los bienes están listos para descargar"@es .
+
+sc:freightPayer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "freight payer"@en,
+        "pagador del flete"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role that contracts and pays for main sea freight under an Incoterms rule."@en,
+        "Rol contractual que contrata y paga el flete marítimo principal según una regla Incoterms."@es .
+
+sc:transitRiskBearer a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "transit risk bearer"@en,
+        "responsable del riesgo en tránsito"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role that bears cargo loss or damage risk during sea transit under an Incoterms rule."@en,
+        "Rol contractual que asume el riesgo de pérdida o daño de la carga durante el tránsito marítimo según una regla Incoterms."@es .
+
+sc:vesselNominator a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "vessel nominator"@en,
+        "nominador del buque"@es ;
+    rdfs:domain sc:IncotermRule ;
+    rdfs:range sc:ContractualRole ;
+    skos:definition "Contractual role responsible for nominating the vessel under an Incoterms rule."@en,
+        "Rol contractual responsable de nominar el buque según una regla Incoterms."@es .
+
+sc:IncotermEdition a owl:Class ;
+    rdfs:label "Incoterm Edition"@en,
+        "Edición de Incoterms"@es ;
+    skos:definition "Published edition of the ICC Incoterms rules."@en,
+        "Edición publicada de las reglas Incoterms de la CCI."@es .
+
+sc:OnBoardAtLoadPort a owl:NamedIndividual,
+        sc:RiskTransferPoint ;
+    rdfs:label "On Board at Load Port"@en,
+        "A Bordo en el Puerto de Carga"@es ;
+    skos:definition "Cargo risk transfers from seller to buyer when the goods are on board the vessel at the load port"@en,
+        "El riesgo de la carga se transfiere del vendedor al comprador cuando los bienes se cargan a bordo del buque en el puerto de carga"@es .
+
+sc:RiskTransferPoint a owl:Class ;
+    rdfs:label "Risk Transfer Point"@en,
+        "Punto de Transferencia de Riesgo"@es ;
+    skos:definition "Point at which risk transfers from a Contractual Role to the other party"@en,
+        "Punto en el que se realiza la transferencia de riesgo de un rol contractual a la otra contraparte"@es .
+
+sc:ContractualRole a owl:Class ;
+    rdfs:label "Contractual Role"@en,
+        "Rol Contractual"@es ;
+    skos:definition "Contractual role (buyer or seller) used to allocate Incoterms risk and obligations."@en,
+        "Rol contractual (comprador o vendedor) usado para asignar riesgos y obligaciones Incoterms."@es .
+
+sc:hasIncotermRule a owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Incoterm rule"@en,
+        "tiene regla Incoterm"@es ;
+    rdfs:domain sc:PhysicalCrudeContract ;
+    rdfs:range sc:IncotermRule ;
+    skos:definition "Links a physical crude contract to its governing Incoterms rule."@en,
+        "Vincula un contrato físico de crudo con su regla Incoterms aplicable."@es .
+
+sc:BuyerRole a owl:NamedIndividual,
+        sc:ContractualRole ;
+    rdfs:label "Buyer Role"@en,
+        "Rol de Comprador"@es ;
+    skos:definition "Contractual role of the buyer."@en,
+        "Rol contractual del comprador."@es .
+
+sc:IncotermRule a owl:Class ;
+    rdfs:label "Incoterm Rule"@en,
+        "Regla Incoterm"@es ;
+    skos:definition "ICC trade rule defining buyer and seller obligations in a sale of goods contract."@en,
+        "Regla comercial de la CCI que define las obligaciones de comprador y vendedor en una compraventa de mercancías."@es .
+
+sc:SellerRole a owl:NamedIndividual,
+        sc:ContractualRole ;
+    rdfs:label "Seller Role"@en,
+        "Rol de Vendedor"@es ;
+    skos:definition "Contractual role of the seller."@en,
+        "Rol contractual del vendedor."@es .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sc:IncotermRule sc:IncotermEdition sc:ContractualRole sc:PhysicalCrudeContract sc:ContractDocument sc:Party sc:CargoQuantity sc:QuantityUnit sc:RiskTransferPoint ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:BuyerRole sc:SellerRole ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:Incoterms2010 sc:Incoterms2020 ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:FOB sc:CFR sc:CIF sc:DAP ) .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( sc:ArrivalAtDestination sc:OnBoardAtLoadPort ) .
+
