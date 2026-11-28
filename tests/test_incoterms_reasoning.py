@@ -93,6 +93,13 @@ ex:contract_dap a sc:SpotContract ;
     assert (SC.SellerFreightAndTransitRiskContract, RDFS.subClassOf, SC.SellerFreightContract) in g
     assert (SC.SellerFreightAndTransitRiskContract, RDFS.subClassOf, SC.SellerTransitRiskContract) in g
 
+    # Risk transfer point assertions per Incoterm rule (asserted in incoterms.ttl)
+    incoterms_g = Graph().parse(ROOT / "ontology" / "incoterms.ttl", format="turtle")
+    assert (SC.FOB, SC.riskTransferPoint, SC.OnBoardAtLoadPort) in incoterms_g
+    assert (SC.CFR, SC.riskTransferPoint, SC.OnBoardAtLoadPort) in incoterms_g
+    assert (SC.CIF, SC.riskTransferPoint, SC.OnBoardAtLoadPort) in incoterms_g
+    assert (SC.DAP, SC.riskTransferPoint, SC.ArrivalAtDestination) in incoterms_g
+
     # Exact obligation matrix over the 8 defined classes
     expected: dict[URIRef, set[URIRef]] = {
         EX.contract_fob: {
