@@ -90,6 +90,7 @@ sc:typicalSulfurContent a owl:DatatypeProperty,
 sc:HeavyCrudeCargo a owl:Class ;
     rdfs:label "Heavy Crude Cargo"@en,
         "Cargamento de Crudo Pesado"@es ;
+    rdfs:subClassOf sc:Cargo ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
                         owl:onProperty sc:measuredAPIGravity ;
@@ -102,6 +103,7 @@ sc:HeavyCrudeCargo a owl:Class ;
 sc:IntermediateCrudeCargo a owl:Class ;
     rdfs:label "Intermediate Crude Cargo"@en,
         "Cargamento de Crudo Intermedio"@es ;
+    rdfs:subClassOf sc:Cargo ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
                         owl:onProperty sc:measuredAPIGravity ;
@@ -114,6 +116,7 @@ sc:IntermediateCrudeCargo a owl:Class ;
 sc:LightCrudeCargo a owl:Class ;
     rdfs:label "Light Crude Cargo"@en,
         "Cargamento de Crudo Ligero"@es ;
+    rdfs:subClassOf sc:Cargo ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
                         owl:onProperty sc:measuredAPIGravity ;
@@ -126,6 +129,7 @@ sc:LightCrudeCargo a owl:Class ;
 sc:SourCrudeCargo a owl:Class ;
     rdfs:label "Sour Crude Cargo"@en,
         "Cargamento de Crudo Ácido"@es ;
+    rdfs:subClassOf sc:Cargo ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
                         owl:onProperty sc:measuredSulfurContent ;
@@ -138,6 +142,7 @@ sc:SourCrudeCargo a owl:Class ;
 sc:SweetCrudeCargo a owl:Class ;
     rdfs:label "Sweet Crude Cargo"@en,
         "Cargamento de Crudo Dulce"@es ;
+    rdfs:subClassOf sc:Cargo ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( sc:Cargo [ a owl:Restriction ;
                         owl:onProperty sc:measuredSulfurContent ;
